@@ -19,9 +19,9 @@ A detailed **Plugin Developer Guide** is provided below for further reference.
 
 [Download flowpdk](https://flowpdf-libraries.s3.amazonaws.com/flowpdf-cli.zip)
 
-Latest Version: 1.0.0
+Latest Version: 1.0.1
 
-Release Date: 6/24/2019
+Release Date: 7/31/2019
 
 ## Plugin Developer Guide
 
