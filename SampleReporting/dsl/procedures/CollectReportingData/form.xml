@@ -1,0 +1,65 @@
+<!--
+    This form is generated automatically from the parameters pluginspec.
+    Please not not edit this file manually as it will be regenerated.
+-->
+<editor>
+  <help>/commander/pages/@PLUGIN_NAME@/help?s=Administration&amp;ss=Plugins#CollectReportingData</help>
+  <formElement>
+    <type>entry</type>
+    <property>config</property>
+    <configuration>1</configuration>
+    <propertyReference>/plugins/@PLUGIN_NAME@/project/ec_plugin_cfgs</propertyReference>
+    <required>1</required>
+    <documentation>Previously defined plugin configuration.</documentation>
+    <label>Configuration Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>test1</property>
+    <required>1</required>
+    <documentation>Sample reporting parameter</documentation>
+    <label>Test 1:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>test2</property>
+    <required>1</required>
+    <documentation>Sample reporting parameter</documentation>
+    <label>Test 2:</label>
+  </formElement>
+  <formElement>
+    <type>checkbox</type>
+    <property>previewMode</property>
+    <required>0</required>
+    <documentation>If checked, no data will be sent to the reporting system. Use this option to preview gathered data.</documentation>
+    <label>Preview:</label>
+  </formElement>
+  <formElement>
+    <type>textarea</type>
+    <property>transformScript</property>
+    <required>0</required>
+    <htmlDocumentation>Allows user to provide perl script for payload customization. This method will be invoked by plugin with 2 parameters. 1st parameter is context object, 2nd is payload object. Method should be named "transform", and should return payload object. In this example myTimestamp field will be added to payload object: <pre> sub transform { my ($context, $payload) = @_;$payload->{myTimestamp} = $context->one();return $payload;}sub one {my ($context) = @_;return time();}</pre></htmlDocumentation>
+    <documentation>Perl code to transform report payload.</documentation>
+    <label>Transformation Script:</label>
+  </formElement>
+  <formElement>
+    <type>checkbox</type>
+    <property>debug</property>
+    <documentation>If checked, the log level will be set to "Debug" for the job.</documentation>
+    <label>Debug:</label>
+    <checkedValue>1</checkedValue>
+    <uncheckedValue>0</uncheckedValue>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>releaseName</property>
+    <documentation>Name of the CloudBees Flow release collected data relates to.</documentation>
+    <label>Release Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>releaseProjectName</property>
+    <documentation>Name of the CloudBees Flow release project collected data relates to.</documentation>
+    <label>Release Project Name:</label>
+  </formElement>
+</editor>
