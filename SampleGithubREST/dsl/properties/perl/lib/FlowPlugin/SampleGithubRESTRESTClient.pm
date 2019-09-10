@@ -533,6 +533,10 @@ sub _uploadReleaseAsset {
     $request->header('Content-Length', $length);
     my $uri = $request->uri;
     $uri->host('uploads.github.com');
+    if ($params->{assetName}) {
+        $uri->query_form(name => $params->{assetName});
+    }
+    $request->uri($uri);
     return $request;
 }
 

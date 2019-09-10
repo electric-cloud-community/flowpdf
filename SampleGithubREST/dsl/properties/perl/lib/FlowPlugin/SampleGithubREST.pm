@@ -64,7 +64,7 @@ sub getSampleGithubRESTRESTClient {
 # Parameter: assetPath
 
 sub createRelease {
-    my ($pluginObject) = @_;
+    my ($pluginObject, $r) = @_;
 
     my $context = $pluginObject->getContext();
     my $params = $context->getStepParameters();
@@ -75,7 +75,7 @@ sub createRelease {
         repositoryOwner => $params->getParameter('repositoryOwner')->getValue,
         repositoryName => $params->getParameter('repositoryName')->getValue,
         tag_name => $params->getParameter('tagName')->getValue,
-        name => $params->getParameter('name')->getValue,
+        name => $r->{name},
     );
     my $release = eval {
         $client->getReleaseByTagName(%restParams, tag => $params->getParameter('tagName')->getValue);
@@ -92,6 +92,7 @@ sub createRelease {
             %restParams,
             releaseId => $releaseId,
             assetPath => $params->getParameter('assetPath')->getValue,
+            assetName => $r->{assetName},
         );
     };
     logInfo "Asset", $asset;
