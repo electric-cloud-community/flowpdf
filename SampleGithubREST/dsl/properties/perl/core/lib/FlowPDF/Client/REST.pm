@@ -188,7 +188,7 @@ sub new {
             }
 
             # request_method is removed from mandatory fields list for now.
-            for my $p (qw/oauth_signature_method oauth_version request_token_path authorize_token_path access_token_path/) {
+            for my $p (qw/oauth_signature_method oauth_version/) {
                 if (!defined $op->{$p}) {
                     croak "$p is mandatory for oauth component";
                 }

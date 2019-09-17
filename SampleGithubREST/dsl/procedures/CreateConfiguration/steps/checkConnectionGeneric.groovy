@@ -1,5 +1,5 @@
 
-// === check_connection starts ===
+// DO NOT EDIT THIS BLOCK === check_connection starts ===
 import groovy.json.JsonSlurper
 import com.electriccloud.client.groovy.ElectricFlow
 import groovyx.net.http.HTTPBuilder
@@ -159,4 +159,4 @@ def augmentUri(path, uri) {
     }
     return path
 }
-// === check_connection ends, checksum: 6914652ff187acb479ce95da04aa7bf9 ===
+// DO NOT EDIT THIS BLOCK === check_connection ends, checksum: 6914652ff187acb479ce95da04aa7bf9 ===

@@ -28,7 +28,7 @@ An exception that represents a generic runtime exception.
 
 =head1 USAGE
 
-This exception could be created using new() methon in one of the following ways:
+This exception could be created using new() method in one of the following ways:
 
 =over
 

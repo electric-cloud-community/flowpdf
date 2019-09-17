@@ -1,4 +1,4 @@
-## === rest client imports starts ===
+## DO NOT EDIT THIS BLOCK === rest client imports starts ===
 package FlowPlugin::SampleGithubRESTRESTClient;
 use strict;
 use warnings;
@@ -7,10 +7,10 @@ use JSON;
 use Data::Dumper;
 use FlowPDF::Client::REST;
 use FlowPDF::Log;
-## === rest client imports ends, checksum: 877ea7f66adab8b6bd67aa60e4456e18 ===
+## DO NOT EDIT THIS BLOCK === rest client imports ends, checksum: 877ea7f66adab8b6bd67aa60e4456e18 ===
 # Place for the custom user imports, e.g. use File::Spec
 use Carp qw(croak);
-## === rest client starts ===
+## DO NOT EDIT THIS BLOCK === rest client starts ===
 =head1
 
 FlowPlugin::SampleGithubRESTRESTClient->new('http://endpoint', {
@@ -121,7 +121,7 @@ sub createFromConfig {
         };
         return $class->new($endpoint, %construction_params);
     }
-    elsif ($configParams->{authScheme} eq 'anonymous') {
+    elsif ($configParams->{authScheme} && $configParams->{authScheme} eq 'anonymous') {
         return $class->new($endpoint, %construction_params);
     }
     elsif ($configParams->{oauth1_user}) {
@@ -145,7 +145,7 @@ sub makeRequest {
     logDebug("Request after augment", $request);
     my $response = $self->rest->doRequest($request);
     logDebug("Response", $response);
-    my $retval = $self->processResponse($response);
+    my $retval = $self->processResponse($response, $params);
     if ($retval) {
         return $retval;
     }
@@ -158,8 +158,26 @@ sub makeRequest {
     }
 }
 
+=pod
+
+Returns the name of the caller method.
+Intended to be used in the user-defined methods.
+
+=cut
+
 sub method {
     return shift->{method};
+}
+
+=pod
+
+Returns the original parameters passed to the caller method.
+Intended to be used in the user-defined methods.
+
+=cut
+
+sub methodParameters {
+    return shift->{methodParameters};
 }
 
 sub rest {
@@ -191,11 +209,11 @@ sub rest {
         }
         if ($self->{oauth1}) {
             my $oauth = $self->{oauth1};
-            $p->{oauth} = {
+            $p->{auth} = {
+                type => 'oauth',
                 oauth_version => '1.0',
                 oauth_signature_method => OAUTH1_SIGNATURE_METHOD,
                 request_method => $requestMethod,
-                request_token_path => 'plugins/servlet/oauth/request-token',
                 base_url => $self->{endpoint},
                 # todo validate
                 private_key => $oauth->{privateKey},
@@ -342,10 +360,8 @@ sub renderOneLineTemplate {
 sub uploadReleaseAsset {
     my ($self, %params) = @_;
 
-    my $override = $self->can("uploadReleaseAssetOverride");
-    if ($override) {
-        return $self->$override(%params);
-    }
+    $self->{method} = 'uploadReleaseAsset';
+    $self->{methodParameters} = \%params;
 
     my $uri = "/repos/{{repositoryOwner}}/{{repositoryName}}/releases/{{releaseId}}/assets";
     $uri = renderOneLineTemplate($uri, %params);
@@ -356,12 +372,13 @@ sub uploadReleaseAsset {
     };
 
     # TODO handle credentials
+    # TODO Handle empty parameters
     my $payload = {
 
     };
     logDebug($payload);
 
-    $self->{method} = 'uploadReleaseAsset';
+    $payload = $self->cleanEmptyFields($payload);
 
     my $headers = {
     };
@@ -386,10 +403,8 @@ sub uploadReleaseAsset {
 sub getReleaseByTagName {
     my ($self, %params) = @_;
 
-    my $override = $self->can("getReleaseByTagNameOverride");
-    if ($override) {
-        return $self->$override(%params);
-    }
+    $self->{method} = 'getReleaseByTagName';
+    $self->{methodParameters} = \%params;
 
     my $uri = "/repos/{{repositoryOwner}}/{{repositoryName}}/releases/tags/{{tag}}";
     $uri = renderOneLineTemplate($uri, %params);
@@ -400,12 +415,13 @@ sub getReleaseByTagName {
     };
 
     # TODO handle credentials
+    # TODO Handle empty parameters
     my $payload = {
 
     };
     logDebug($payload);
 
-    $self->{method} = 'getReleaseByTagName';
+    $payload = $self->cleanEmptyFields($payload);
 
     my $headers = {
     };
@@ -424,10 +440,8 @@ sub getReleaseByTagName {
 sub getUser {
     my ($self, %params) = @_;
 
-    my $override = $self->can("getUserOverride");
-    if ($override) {
-        return $self->$override(%params);
-    }
+    $self->{method} = 'getUser';
+    $self->{methodParameters} = \%params;
 
     my $uri = "/users/{{username}}";
     $uri = renderOneLineTemplate($uri, %params);
@@ -436,12 +450,13 @@ sub getUser {
     };
 
     # TODO handle credentials
+    # TODO Handle empty parameters
     my $payload = {
 
     };
     logDebug($payload);
 
-    $self->{method} = 'getUser';
+    $payload = $self->cleanEmptyFields($payload);
 
     my $headers = {
     };
@@ -466,10 +481,8 @@ sub getUser {
 sub createRelease {
     my ($self, %params) = @_;
 
-    my $override = $self->can("createReleaseOverride");
-    if ($override) {
-        return $self->$override(%params);
-    }
+    $self->{method} = 'createRelease';
+    $self->{methodParameters} = \%params;
 
     my $uri = "/repos/{{repositoryOwner}}/{{repositoryName}}/releases";
     $uri = renderOneLineTemplate($uri, %params);
@@ -478,6 +491,7 @@ sub createRelease {
     };
 
     # TODO handle credentials
+    # TODO Handle empty parameters
     my $payload = {
 
         'tag_name' => $params{ tag_name },
@@ -487,7 +501,7 @@ sub createRelease {
     };
     logDebug($payload);
 
-    $self->{method} = 'createRelease';
+    $payload = $self->cleanEmptyFields($payload);
 
     my $headers = {
     };
@@ -498,7 +512,7 @@ sub createRelease {
     my $response = $self->makeRequest('POST', $uri, $query, $payload, $headers, \%params);
     return $response;
 }
-## === rest client ends, checksum: a683e985f9e25efbc5c601116bb5d0bc ===
+## DO NOT EDIT THIS BLOCK === rest client ends, checksum: 4e7145fe94c0986487bbc2d0ca75ab59 ===
 =pod
 
 Use ths method to change HTTP::Request object before the request, e.g.

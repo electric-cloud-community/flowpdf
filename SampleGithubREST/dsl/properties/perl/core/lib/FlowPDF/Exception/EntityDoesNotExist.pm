@@ -50,11 +50,11 @@ CloudBees
 
 =head1 DESCRIPTION
 
-An exception that represents a situation when something does not exist, but it should. Like required parameter in hashref.
+An exception that represents a situation when something does not exist, but it should. Like required parameter in a hashref.
 
 =head1 USAGE
 
-This exception could be created using new() methon in one of the following ways:
+This exception could be created using new() method in one of the following ways:
 
 =over
 

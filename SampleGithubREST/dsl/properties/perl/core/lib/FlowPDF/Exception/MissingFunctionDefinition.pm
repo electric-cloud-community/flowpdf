@@ -43,7 +43,7 @@ An exception that represents a situation when some class does not have some func
 
 =head1 USAGE
 
-This exception could be created using new() methon in one of the following ways:
+This exception could be created using new() method in one of the following ways:
 
 =over
 

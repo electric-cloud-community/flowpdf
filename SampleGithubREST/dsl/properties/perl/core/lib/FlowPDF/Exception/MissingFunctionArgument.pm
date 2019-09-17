@@ -46,7 +46,7 @@ An exception that represents a situation when function didn't receive a mandator
 
 =head1 USAGE
 
-This exception could be created using new() methon in one of the following ways:
+This exception could be created using new() method in one of the following ways:
 
 =over
 
