@@ -77,7 +77,7 @@ if (proxyUrlFormalParameter) {
 // Should be ignored after the proxy is set
 http.ignoreSSLIssues()
 
-http.request(GET, JSON) { req ->
+http.request(GET, TEXT) { req ->
   headers.'User-Agent' = 'FlowPDF Check Connection'
 
   if (checkConnectionMeta.headers) {
@@ -85,11 +85,7 @@ http.request(GET, JSON) { req ->
     println "Added headers: $checkConnectionMeta.headers"
   }
 
-  if (checkConnectionMeta.checkConnectionUri != null) {
-    uri.path = augmentUri(uri.path, checkConnectionMeta.checkConnectionUri)
-    println "URI: $uri"
-  }
-
+  boolean uriChanged = false
   if (authType == "basic") {
     def meta = checkConnectionMeta?.authSchemes?.basic
     def credentialName = meta?.credentialName ?: "basic_credential"
@@ -104,6 +100,7 @@ http.request(GET, JSON) { req ->
     if (meta.checkConnectionUri != null) {
         uri.path = augmentUri(uri.path, meta.checkConnectionUri)
         println "Check Connection URI: $uri"
+        uriChanged = true
     }
   }
 
@@ -117,6 +114,7 @@ http.request(GET, JSON) { req ->
     if (meta.checkConnectionUri != null) {
         uri.path = augmentUri(uri.path, meta.checkConnectionUri)
         println "Check Connection URI: $uri"
+        uriChanged = true
     }
   }
 
@@ -124,9 +122,15 @@ http.request(GET, JSON) { req ->
     println "Anonymous access"
     def meta = checkConnectionMeta?.authSchemes?.anonymous
     if (meta.checkConnectionUri != null) {
-      uri.path = meta.checkConnectionUri
+      uri.path = augmentUri(uri.path, meta.checkConnectionUri)
       println "Check Connection URI: $uri"
+      uriChanged = true
     }
+  }
+
+  if (checkConnectionMeta.checkConnectionUri != null && !uriChanged) {
+    uri.path = augmentUri(uri.path, checkConnectionMeta.checkConnectionUri)
+    println "URI: $uri"
   }
 
   response.success = { resp, reader ->
@@ -159,4 +163,4 @@ def augmentUri(path, uri) {
     }
     return path
 }
-// DO NOT EDIT THIS BLOCK === check_connection ends, checksum: 6914652ff187acb479ce95da04aa7bf9 ===
+// DO NOT EDIT THIS BLOCK === check_connection ends, checksum: 97cd8438a36aafa232159c8c1fa5fd2a ===

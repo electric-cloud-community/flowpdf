@@ -43,9 +43,8 @@ project pluginName, {
 
 def retainedProperties = []
 
-retainedProperties << ''
 upgrade(upgradeAction, pluginName, otherPluginName, stepsWithAttachedCredentials, 'ec_plugin_cfgs', retainedProperties)
-// DO NOT EDIT THIS BLOCK === promote_autogen ends, checksum: 15b3032cfccd8911dfc01b6c4031476c ===
+// DO NOT EDIT THIS BLOCK === promote_autogen ends, checksum: af27ff3e64d10dc61cc67771af0c15ed ===
 // Do not edit the code above this line
 
 project pluginName, {
