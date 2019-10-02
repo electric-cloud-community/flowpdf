@@ -1,17 +1,18 @@
-# This is default sample specification
-# Feel free to change it
-# Call flowpdk showdoc pluginspec to see the list of available fields and their description
-pluginName: 'SampleGithubREST'
-version: '1.0.0'
-description: 'Sample plugin to demonstrate auto-generated REST client.'
-author: 'CloudBees'
-authorUrl: 'No support URL'
-category: 'Source Control'
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call flowpdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'SampleGithubREST'
+  version: '1.0.0'
+  description: 'Sample plugin to demonstrate auto-generated REST client.'
+  author: 'CloudBees'
+  authorUrl: 'No support URL'
+  category: 'Source Control'
 
 # REST-backed plugin configuration
 configuration:
   checkConnection: true
-  rest:
+  restConfigInfo:
     endpointLabel: 'Github Endpoint'
     endpointDescription: Endpoint to connect to.
     checkConnectionUri: '/user'
@@ -32,7 +33,7 @@ configuration:
   hasDebugLevel: true
 
 
-rest:
+restClient:
   userAgent: My Github Client
   language: perl
   endpoints:
@@ -76,9 +77,9 @@ procedures:
     required: true
     type: entry
     label: Username
-    rest:
+    restParamInfo:
       in: path
-  rest:
+  restProcedureInfo:
     url: '/users/{{username}}'
     methodName: 'getUser'
     httpMethod: 'GET'
@@ -95,7 +96,7 @@ procedures:
     required: true
     type: entry
     label: Repository Owner
-    rest:
+    restParamInfo:
       in: path
   -
     name: repositoryName
@@ -103,7 +104,7 @@ procedures:
     required: true
     type: entry
     label: Repository Name
-    rest:
+    restParamInfo:
       in: path
   -
     name: tagName
@@ -111,7 +112,7 @@ procedures:
     required: true
     type: entry
     label: Tag Name
-    rest:
+    restParamInfo:
       in: body
       name: tag_name
   -
@@ -120,7 +121,7 @@ procedures:
     required: false
     type: entry
     label: Release Name
-    rest:
+    restParamInfo:
       in: body
 
   -
@@ -137,7 +138,7 @@ procedures:
     type: entry
     label: Release Asset Path
 
-  rest:
+  restProcedureInfo:
     url: '/repos/{{repositoryOwner}}/{{repositoryName}}/releases'
     methodName: 'createRelease'
     contentType: application/json

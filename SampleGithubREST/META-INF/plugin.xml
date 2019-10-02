@@ -6,7 +6,7 @@
   <category>Source Control</category>
   <description>Sample plugin to demonstrate auto-generated REST client.</description>
   <configure>ec_config</configure>
-  <version>1.0.0</version>
+  <version>1.0.0.0</version>
   <authorUrl>No support URL</authorUrl>
   <help>help.xml</help>
   <depends min='1.4.1'>EC-PluginManager</depends>
