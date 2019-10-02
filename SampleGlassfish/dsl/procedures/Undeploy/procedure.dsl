@@ -1,5 +1,5 @@
 
-// === procedure_autogen starts ===
+// DO NOT EDIT THIS BLOCK === procedure_autogen starts ===
 procedure 'Undeploy', description: 'Undeploys a previously deployed application', {
 
     step 'Undeploy', {
@@ -7,6 +7,7 @@ procedure 'Undeploy', description: 'Undeploys a previously deployed application'
         command = new File(pluginDir, "dsl/procedures/Undeploy/steps/Undeploy.pl").text
         shell = 'ec-perl'
 
-        }
-// === procedure_autogen ends, checksum: 044b3a45b979888c860568f0314254ae ===
+        postProcessor = '''$[/myProject/perl/postpLoader]'''
+    }
+// DO NOT EDIT THIS BLOCK === procedure_autogen ends, checksum: 68fd8d36086ffddc145a14ea1b54770c ===
 }
