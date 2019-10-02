@@ -1,5 +1,5 @@
 
-// === promote_autogen starts ===
+// DO NOT EDIT THIS BLOCK === promote_autogen starts ===
 import groovy.transform.BaseScript
 import com.electriccloud.commander.dsl.util.BasePlugin
 
@@ -38,7 +38,7 @@ project pluginName, {
         }
     }
 
-    // Feature: devopsInsight
+    // Feature: devOpsInsight
     property 'ec_devops_insight', {
 
     property 'build', {
@@ -56,7 +56,7 @@ project pluginName, {
     }
 
 upgrade(upgradeAction, pluginName, otherPluginName, stepsWithAttachedCredentials)
-// === promote_autogen ends, checksum: 4b377caf88eb23116e5a7cfcc5fdd96b ===
+// DO NOT EDIT THIS BLOCK === promote_autogen ends, checksum: db68801fc56a261875de1507e71392fc ===
 // Do not edit the code above this line
 
 project pluginName, {

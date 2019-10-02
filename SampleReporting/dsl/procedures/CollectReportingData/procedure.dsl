@@ -1,5 +1,5 @@
 // This procedure.dsl was generated automatically
-// === procedure_autogen starts ===
+// DO NOT EDIT THIS BLOCK === procedure_autogen starts ===
 procedure 'CollectReportingData', description: '', {
     property 'standardStepPicker', value: false
 
@@ -10,7 +10,7 @@ procedure 'CollectReportingData', description: '', {
 
         postProcessor = '''$[/myProject/perl/postpLoader]'''
     }
-// === procedure_autogen ends, checksum: 73916b2b53394000e20a2d77159f70be ===
+// DO NOT EDIT THIS BLOCK === procedure_autogen ends, checksum: 73916b2b53394000e20a2d77159f70be ===
 // Do not update the code above the line
 // procedure properties declaration can be placed in here, like
 // property 'property name', value: "value"

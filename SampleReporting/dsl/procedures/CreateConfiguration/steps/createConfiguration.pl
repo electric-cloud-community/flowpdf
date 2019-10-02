@@ -1,5 +1,5 @@
 
-## === createConfiguration starts ===
+## DO NOT EDIT THIS BLOCK === createConfiguration starts ===
 #
 #  Copyright 2016 Electric Cloud, Inc.
 #
@@ -204,6 +204,6 @@ sub createConfigurationPropertySheet {
         $cfg->setCol("$opts->{config}", "$key", "$opts->{$key}");
     }
 }
-## === createConfiguration ends, checksum: b9c4ad2aeb2b3997dfbec1b845c4d7b4 ===
+## DO NOT EDIT THIS BLOCK === createConfiguration ends, checksum: b9c4ad2aeb2b3997dfbec1b845c4d7b4 ===
 # user-defined code can be placed below this line
 # Do not edit the code above the line as it will be updated upon plugin upgrade

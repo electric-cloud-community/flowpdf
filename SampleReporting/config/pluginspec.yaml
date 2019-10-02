@@ -1,33 +1,34 @@
-# This is default sample specification
-# Feel free to change it
-# Call flowpdk showdoc pluginspec to see the list of available fields and their description
-pluginName: 'Reporting'
-description: 'No description'
-version: '1.0.0'
-author: 'No Name'
-authorUrl: 'No support URL'
-category: 'Utilities'
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call flowpdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'Reporting'
+  description: 'No description'
+  version: '1.0.0'
+  author: 'No Name'
+  authorUrl: 'No support URL'
+  category: 'Utilities'
 
 configuration:
   hasDebugLevel: true
-  rest:
+  restConfigInfo:
     authSchemes:
       basic:
         checkConnectionUri: '/url'
 
-features:
-  devopsInsight:
-    sourceName: 'Sample Reporting Source'
-    supportedPayloads:
-      - name: build
-        parameters:
-        - name: test1
-          documentation: Sample reporting parameter
-          type: entry
-          required: true
-          label: Test 1
-        - name: test2
-          documentation: Sample reporting parameter
-          type: entry
-          required: true
-          label: Test 2
+
+devOpsInsight:
+  datasourceName: 'Sample Reporting Source'
+  supportedReports:
+    - reportObjectType: build
+      parameters:
+      - name: test1
+        documentation: Sample reporting parameter
+        type: entry
+        required: true
+        label: Test 1
+      - name: test2
+        documentation: Sample reporting parameter
+        type: entry
+        required: true
+        label: Test 2

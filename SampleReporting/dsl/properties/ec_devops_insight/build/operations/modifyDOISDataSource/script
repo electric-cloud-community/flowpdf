@@ -69,7 +69,7 @@ def getModifyActualParameters(Map pluginParameters) {
 
     ]
 }
-// === datasource starts ===
+// DO NOT EDIT THIS BLOCK === datasource starts ===
 void checkPayloadType(String payloadType) {
     if (payloadType == null) {
         throw EcException
@@ -278,4 +278,4 @@ retval.scheduleName = scheduleName;
 retval.scheduleProjectName = scheduleProjectName;
 
 retval;
-// === datasource ends, checksum: baf0a64fc50ab80a710995fb78944242 ===
+// DO NOT EDIT THIS BLOCK === datasource ends, checksum: baf0a64fc50ab80a710995fb78944242 ===

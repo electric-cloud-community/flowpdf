@@ -1,5 +1,5 @@
 
-// === configuration starts ===
+// DO NOT EDIT THIS BLOCK === configuration starts ===
 // This part is auto-generated and will be regenerated upon subsequent updates
 procedure 'CreateConfiguration', description: 'Creates a plugin configuration', {
 
@@ -13,6 +13,6 @@ procedure 'CreateConfiguration', description: 'Creates a plugin configuration', 
         timeLimitUnits: 'minutes'
 
     property 'ec_checkConnection', value: ''
-// === configuration ends, checksum: 8e292d191415a8f02e2350128b9946c2 ===
+// DO NOT EDIT THIS BLOCK === configuration ends, checksum: 8e292d191415a8f02e2350128b9946c2 ===
 // Place your code below
 }
