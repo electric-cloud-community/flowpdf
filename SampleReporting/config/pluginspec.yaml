@@ -2,7 +2,7 @@ pluginInfo:
   # This is default sample specification
   # Feel free to change it
   # Call flowpdk showdoc pluginspec to see the list of available fields and their description
-  pluginName: 'Reporting'
+  pluginName: 'SampleReporting'
   description: 'No description'
   version: '1.0.0'
   author: 'No Name'
