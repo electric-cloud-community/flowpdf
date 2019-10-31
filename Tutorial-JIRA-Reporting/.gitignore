@@ -1,0 +1,8 @@
+!ecpluginbuilder.exe
+ecpluginbuilder
+.idea
+*.iml
+.DS_Store
+build
+bin
+.assets
