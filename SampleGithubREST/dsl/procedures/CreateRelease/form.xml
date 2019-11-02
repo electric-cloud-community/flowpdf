@@ -1,0 +1,58 @@
+<!--
+    This form is generated automatically from the parameters pluginspec.
+    Please not not edit this file manually as it will be regenerated.
+-->
+<editor>
+  <help>/commander/pages/@PLUGIN_NAME@/help?s=Administration&amp;ss=Plugins#CreateRelease</help>
+  <formElement>
+    <type>entry</type>
+    <property>config</property>
+    <configuration>1</configuration>
+    <propertyReference>/plugins/@PLUGIN_NAME@/project/ec_plugin_cfgs</propertyReference>
+    <required>1</required>
+    <documentation>Previously defined configuration for the plugin</documentation>
+    <label>Configuration Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>repositoryOwner</property>
+    <required>1</required>
+    <documentation>Repository owner name, either user or organization.</documentation>
+    <label>Repository Owner:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>repositoryName</property>
+    <required>1</required>
+    <documentation>Repository name, e.g. my-repo</documentation>
+    <label>Repository Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>tagName</property>
+    <required>1</required>
+    <documentation>Tag name for the release, e.g. v1.0</documentation>
+    <label>Tag Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>name</property>
+    <required>0</required>
+    <documentation>Name for the release</documentation>
+    <label>Release Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>assetName</property>
+    <required>1</required>
+    <documentation>Release asset name, e.g. myfile.zip</documentation>
+    <label>Release Asset Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>assetPath</property>
+    <required>1</required>
+    <documentation>Release asset path, e.g. /tmp/myfile.zip</documentation>
+    <label>Release Asset Path:</label>
+  </formElement>
+</editor>

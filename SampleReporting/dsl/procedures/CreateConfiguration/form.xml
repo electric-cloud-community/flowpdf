@@ -1,0 +1,57 @@
+<!--
+    This form is generated automatically from the parameters pluginspec.
+    Please not not edit this file manually as it will be regenerated.
+-->
+
+<editor>
+  <help>/commander/pages/@PLUGIN_NAME@/help?s=Administration&amp;ss=Plugins#CreateConfiguration</help>
+  <formElement>
+    <type>entry</type>
+    <property>config</property>
+    <required>1</required>
+    <documentation>Unique name for the configuration</documentation>
+    <label>Configuration Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>desc</property>
+    <required>0</required>
+    <documentation>Configuration description</documentation>
+    <label>Description:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>endpoint</property>
+    <required>1</required>
+    <htmlDocumentation>REST API Endpoint</htmlDocumentation>
+    <label>REST API Endpoint:</label>
+  </formElement>
+  <formElement>
+    <type>credential</type>
+    <property>basic_credential</property>
+    <required>1</required>
+    <htmlDocumentation>Username and password for the Basic authentication</htmlDocumentation>
+    <label>Basic Auth Credential:</label>
+    <attachedAsParameterToStep>createConfiguration</attachedAsParameterToStep>
+  </formElement>
+  <formElement>
+    <type>select</type>
+    <property>debugLevel</property>
+    <required>0</required>
+    <documentation>This option sets debug level for logs. If info is selected, only summary information will be shown, for debug, there will be some debug information and for trace the whole requests and responses will be shown.</documentation>
+    <label>Debug Level:</label>
+    <option>
+      <name>Info</name>
+      <value>0</value>
+    </option>
+    <option>
+      <name>Debug</name>
+      <value>1</value>
+    </option>
+    <option>
+      <name>Trace</name>
+      <value>2</value>
+    </option>
+    <value>0</value>
+  </formElement>
+</editor>

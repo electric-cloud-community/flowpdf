@@ -1,5 +1,5 @@
 
-// === procedure_autogen starts ===
+// DO NOT EDIT THIS BLOCK === procedure_autogen starts ===
 procedure 'Get Issue', description: 'Gets issue by its id', {
 
     step 'Get Issue', {
@@ -7,9 +7,10 @@ procedure 'Get Issue', description: 'Gets issue by its id', {
         command = new File(pluginDir, "dsl/procedures/GetIssue/steps/GetIssue.pl").text
         shell = 'ec-perl'
 
-        }
+        postProcessor = '''$[/myProject/perl/postpLoader]'''
+    }
 
     formalOutputParameter 'issue',
         description: 'An issue details'
-// === procedure_autogen ends, checksum: 4736fe41488a1fe942b9000646f8d6eb ===
+// DO NOT EDIT THIS BLOCK === procedure_autogen ends, checksum: da2273ab94402bfee380a81f63972a62 ===
 }

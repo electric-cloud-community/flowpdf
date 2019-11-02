@@ -7,7 +7,7 @@
   <description>Sample plugin to integrate with Glassfish Application Server</description>
   <configure>ec_config</configure>
   <version>1.0.0</version>
-  <authorUrl />
+  <authorUrl>No support URL</authorUrl>
   <help>help.xml</help>
   <depends min='1.4.1'>EC-PluginManager</depends>
   <commander-version min='6.0' />

@@ -1,11 +1,12 @@
-# This is default sample specification
-# Feel free to change it
-pluginName: Sample JIRA Plugin
-description: Sample plugin to demonstrate REST Integration
-version: 1.0.0
-author: Sample Author
-supportUrl: No support URL
-category: Bug Tracking
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  pluginName: Sample JIRA Plugin
+  description: Sample plugin to demonstrate REST Integration
+  version: 1.0.0
+  author: Sample Author
+  supportUrl: No support URL
+  category: Bug Tracking
 
 # This is a declaration for the plugin configuration
 configuration:

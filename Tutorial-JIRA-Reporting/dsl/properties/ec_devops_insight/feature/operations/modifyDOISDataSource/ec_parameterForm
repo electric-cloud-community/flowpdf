@@ -1,0 +1,27 @@
+<editor>
+  <help>/commander/pages/@PLUGIN_NAME@/help?s=Administration&amp;ss=Plugins#CollectReportingData</help>
+  <formElement>
+    <type>entry</type>
+    <property>config</property>
+    <configuration>1</configuration>
+    <propertyReference>/plugins/@PLUGIN_NAME@/project/ec_plugin_cfgs</propertyReference>
+    <required>1</required>
+    <documentation>Previously defined plugin configuration.</documentation>
+    <label>Configuration Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>jiraProjectName</property>
+    <required>1</required>
+    <documentation>A JIRA project that will be used</documentation>
+    <label>JIRA project name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>frequency</property>
+    <required>0</required>
+    <documentation>Polling frequency (in minutes) for retrieving defects from the system</documentation>
+    <label>Polling Frequency:</label>
+    <value>30</value>
+  </formElement>
+</editor>
