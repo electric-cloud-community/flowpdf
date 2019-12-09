@@ -1,13 +1,8 @@
-import com.amazonaws.auth.AWSCredentialsProvider
-import com.amazonaws.auth.AWSStaticCredentialsProvider
-import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.auth.*
 import com.amazonaws.regions.Regions
-import com.amazonaws.services.cloudfront.AmazonCloudFront
-import com.amazonaws.services.cloudfront.AmazonCloudFrontClientBuilder
+import com.amazonaws.services.cloudfront.*
 import com.amazonaws.services.cloudfront.model.*
-import com.cloudbees.flowpdf.FlowPlugin
-import com.cloudbees.flowpdf.StepParameters
-import com.cloudbees.flowpdf.StepResult
+import com.cloudbees.flowpdf.*
 import com.cloudbees.flowpdf.exceptions.UnexpectedMissingValue
 
 /**
@@ -26,45 +21,45 @@ class SampleAWSCloudFront extends FlowPlugin {
         ]
     }
 
-/**
- * invalidateCache - Invalidate Cache/Invalidate Cache
- * Add your code into this method and it will be called when the step runs
- * @param config (required: true)
- * @param distributionId (required: true)
- * @param objectPaths (required: true)
- * @param uniqueCallerReference (required: false)
- * @param callerReference (required: false)
-
- */
+    /**
+     * invalidateCache - Invalidate Cache/Invalidate Cache
+     * Add your code into this method and it will be called when the step runs
+     * @param config (required: true)
+     * @param distributionId (required: true)
+     * @param objectPaths (required: true)
+     * @param uniqueCallerReference (required: false)
+     * @param callerReference (required: false)
+     */
     def invalidateCache(StepParameters p, StepResult sr) {
-        log.info("invalidateCache was invoked with StepParameters", p)
 
+        /** Retrieve the credential and initialize the client */
         def credential = p.getRequiredCredential('credential')
         CloudFrontPlugin cfPlugin = new CloudFrontPlugin(credential.getUserName(), credential.getSecretValue())
 
+        /** Get and process the parameters */
         String distributionId = p.getRequiredParameter('distributionId').getValue()
         List paths = p.getRequiredParameter('objectPaths').getValue().split(/\n+/).collect { it }
-
         String callerReference = p.getParameter('callerReference').getValue() as String
+
         if (!callerReference) {
-            if (!(p.getParameter('uniqueCallerReference').getValue().toString() == 'true')) {
-                throw new UnexpectedMissingValue("Either 'Caller Reference' or 'Generate Unique Caller Reference' should be specified.")
-            } else {
+            if (p.getParameter('uniqueCallerReference').getValue().toString() == 'true') {
                 callerReference = "Auto Generated Reference at " + new Date()
+            } else {
+                /** Raising exception */
+                throw new UnexpectedMissingValue("Either 'Caller Reference' or 'Generate Unique Caller Reference' should be specified.")
             }
         }
 
-        try {
-            cfPlugin.invalidateCache(distributionId, paths, callerReference)
-            sr.setJobStepOutcome('success')
-            sr.setJobStepSummary('Invalidated.')
-        } catch (Exception exception) {
-            sr.setJobStepOutcome('error')
-            sr.setJobStepSummary(exception.getMessage())
-            log.debug(exception.getMessage(), exception.getStackTrace())
-        }
+        /** Call the client method to make the invalidation */
+        def invalidation = cfPlugin.invalidateCache(distributionId, paths, callerReference)
+
+        sr.setOutputParameter('invalidationId', invalidation.id)
+        sr.setPipelineSummary("Invalidation Id", invalidation.id)
+        sr.setJobSummary("Created invalidation Id is : ${invalidation.id}")
+        sr.setJobStepSummary("Created invalidation Id is : ${invalidation.id}")
 
         sr.apply()
+
         log.info("step Invalidate Cache has been finished")
     }
 
@@ -108,6 +103,8 @@ class CloudFrontPlugin {
             invalidation = getInvalidation(distributionId, invalidation.id)
             print "."
         }
+
+        return invalidation
     }
 
     Invalidation getInvalidation(String distributionId, String invalidationId) {
