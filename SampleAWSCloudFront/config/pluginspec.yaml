@@ -1,0 +1,75 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call flowpdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'SampleAWSCloudFront'
+  version: '1.0.0'
+  description: 'Example of the plugin that uses AWS CloudFront API'
+  author: 'CloudBees'
+  supportUrl: '<>'
+  category: 'Utilities'
+
+# Plugin configuration description
+configuration:
+  # This is a shell used for checking connection
+  shell: 'ec-perl'
+  # A script for checking connection will be generated
+  checkConnection: 'true'
+  # A set of fields will be added to process debug level in the configuration
+  hasDebugLevel: true
+  parameters:
+  -
+    name: config
+    documentation: The name for the created configuration
+    required: true
+    type: entry
+    label: Configuration Name
+  -
+    name: desc
+    documentation: Description for the configuration
+    required: false
+    type: entry
+    label: Description
+  -
+    name: credential
+    documentation: A sample credential
+    required: true
+    type: credential
+    label: Credential
+
+procedures:
+-
+  name: 'Invalidate Cache'
+  description: 'Invalidates the distribution cache'
+  hasConfig: true
+  shell: 'ec-groovy'
+  parameters:
+  -
+    name: distributionId
+    documentation: The distribution ID associated with the invalidation.
+    required: true
+    type: entry
+    label: Distribution ID
+  -
+    name: objectPaths
+    documentation: Objects paths, newline-separated.
+    required: true
+    type: textarea
+    label: Object Paths
+  -
+    name: uniqueCallerReference
+    documentation: If checked, unique caller reference will be generated automatically.
+    required: false
+    type: checkbox
+    label: Generate Unique Caller Reference
+    initiallyChecked: true
+    checkedValue: true
+    uncheckedValue: false
+  -
+    name: callerReference
+    documentation: Caller reference to identify invalidation request.
+    required: false
+    type: entry
+    label: Caller Reference
+    dependsOn: uniqueCallerReference
+    condition: ${uniqueCallerReference} == 'false'
