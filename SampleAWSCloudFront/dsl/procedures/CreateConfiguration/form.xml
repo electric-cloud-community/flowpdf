@@ -9,32 +9,24 @@
     <type>entry</type>
     <property>config</property>
     <required>1</required>
-    <documentation>The name for the created configuration</documentation>
+    <documentation>The name for the created configuration.</documentation>
     <label>Configuration Name:</label>
   </formElement>
   <formElement>
     <type>entry</type>
     <property>desc</property>
     <required>0</required>
-    <documentation>Description for the configuration</documentation>
+    <documentation>Description for the configuration.</documentation>
     <label>Description:</label>
   </formElement>
   <formElement>
     <type>credential</type>
     <property>credential</property>
     <required>1</required>
-    <documentation>A sample credential</documentation>
     <label>Credential:</label>
-    <attachedAsParameterToStep>createConfiguration,checkConnection</attachedAsParameterToStep>
-  </formElement>
-  <formElement>
-    <type>checkbox</type>
-    <property>checkConnection</property>
-    <documentation>If checked, a connection endpoint and credentials will be tested before save. The configuration will not be saved if the test fails.</documentation>
-    <label>Check Connection?:</label>
-    <checkedValue>true</checkedValue>
-    <initiallyChecked>1</initiallyChecked>
-    <uncheckedValue>false</uncheckedValue>
+    <attachedAsParameterToStep>createConfiguration</attachedAsParameterToStep>
+    <passwordLabel>Secret access key</passwordLabel>
+    <userNameLabel>Access key ID</userNameLabel>
   </formElement>
   <formElement>
     <type>select</type>

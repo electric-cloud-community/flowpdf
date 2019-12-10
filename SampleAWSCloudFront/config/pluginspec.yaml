@@ -11,31 +11,28 @@ pluginInfo:
 
 # Plugin configuration description
 configuration:
-  # This is a shell used for checking connection
-  shell: 'ec-perl'
-  # A script for checking connection will be generated
-  checkConnection: 'true'
   # A set of fields will be added to process debug level in the configuration
   hasDebugLevel: true
   parameters:
-  -
-    name: config
-    documentation: The name for the created configuration
-    required: true
-    type: entry
-    label: Configuration Name
-  -
-    name: desc
-    documentation: Description for the configuration
-    required: false
-    type: entry
-    label: Description
-  -
-    name: credential
-    documentation: A sample credential
-    required: true
-    type: credential
-    label: Credential
+    -
+      name: config
+      type: entry
+      label: Configuration Name
+      required: true
+      documentation: The name for the created configuration.
+    -
+      name: desc
+      type: entry
+      label: Description
+      required: false
+      documentation: Description for the configuration.
+    -
+      name: credential
+      type: credential
+      label: Credential
+      userNameLabel: Access key ID
+      required: true
+      passwordLabel: Secret access key
 
 procedures:
 -
@@ -73,3 +70,5 @@ procedures:
     label: Caller Reference
     dependsOn: uniqueCallerReference
     condition: ${uniqueCallerReference} == 'false'
+  outputParameters:
+    invalidationId: Id of the created invalidation

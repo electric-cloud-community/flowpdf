@@ -21,7 +21,10 @@ procedure 'Invalidate Cache', description: '''Invalidates the distribution cache
 
         postProcessor = '''$[/myProject/perl/postpLoader]'''
     }
-// DO NOT EDIT THIS BLOCK === procedure_autogen ends, checksum: 6674c409a21f6185ade7567e76e87fd1 ===
+
+    formalOutputParameter 'invalidationId',
+        description: 'Id of the created invalidation'
+// DO NOT EDIT THIS BLOCK === procedure_autogen ends, checksum: fadc4e6c585d7d29d8036ab4b9a53351 ===
 // Do not update the code above the line
 // procedure properties declaration can be placed in here, like
 // property 'property name', value: "value"

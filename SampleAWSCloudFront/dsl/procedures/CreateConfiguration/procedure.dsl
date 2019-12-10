@@ -2,13 +2,6 @@
 // DO NOT EDIT THIS BLOCK === configuration starts ===
 procedure 'CreateConfiguration', description: 'Creates a plugin configuration', {
 
-    step 'checkConnection',
-        command: new File(pluginDir, "dsl/procedures/CreateConfiguration/steps/checkConnection.pl").text,
-        errorHandling: 'abortProcedure',
-        shell: 'ec-perl',
-        condition: '$[/javascript myJob.checkConnection == "true" || myJob.checkConnection == "1"]',
-        postProcessor: '$[/myProject/perl/postpLoader]'
-
     step 'createConfiguration',
         command: new File(pluginDir, "dsl/procedures/CreateConfiguration/steps/createConfiguration.pl").text,
         errorHandling: 'abortProcedure',
@@ -19,5 +12,5 @@ procedure 'CreateConfiguration', description: 'Creates a plugin configuration', 
         timeLimitUnits: 'minutes'
 
     property 'ec_checkConnection', value: ''
-// DO NOT EDIT THIS BLOCK === configuration ends, checksum: 68dc90052df04a04ad74dae602a56a80 ===
+// DO NOT EDIT THIS BLOCK === configuration ends, checksum: 3a9bcf9be26ddf71372e76023a02a335 ===
 }
