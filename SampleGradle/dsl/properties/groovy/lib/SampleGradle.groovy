@@ -76,6 +76,11 @@ class SampleGradle extends FlowPlugin {
                     sr.setOutcomeProperty('/myJob/gradleStdErr', result.getStdErr())
             }
 
+            if (!result.isSuccess()) {
+                log.error(result.getStdErr())
+                sr.setJobStepOutcome('error')
+            }
+
             sr.setJobStepSummary('All tasks have been finished.')
         }
         catch (Exception ex) {
