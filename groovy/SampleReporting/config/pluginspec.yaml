@@ -1,0 +1,61 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call flowpdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'asd'
+  version: '1.0.0'
+  description: 'Sample plugin description'
+  author: 'Plugin Author'
+  supportUrl: '<>'
+  category: 'Utilities'
+# The reporting configuration, will generate a procedure and a bunch of configuration scripts required for DOIS to work
+devOpsInsight:
+  supportedReports:
+  -
+    reportObjectType: 'build'
+    parameters:
+    -
+      name: param1
+      documentation: null
+      required: true
+      type: entry
+      label: Sample Reporting Parameter
+    -
+      name: param2
+      documentation: null
+      required: false
+      type: entry
+      label: Sample Reporting Parameter 2
+  # The name of the source as it will appear in the dashboards
+  datasourceName: 'My Source Name'
+  language: 'groovy'
+
+# Plugin configuration description
+configuration:
+  # A set of fields will be added to process debug level in the configuration
+  hasDebugLevel: true
+  parameters:
+  -
+    name: config
+    documentation: The name for the created configuration
+    required: true
+    type: entry
+    label: Configuration Name
+  -
+    name: desc
+    documentation: Description for the configuration
+    required: false
+    type: entry
+    label: Description
+  -
+    name: endpoint
+    documentation: Third-party endpoint to connect to.
+    required: false
+    type: entry
+    label: Endpoint
+  -
+    name: credential
+    documentation: A sample credential
+    required: true
+    type: credential
+    label: Credential
