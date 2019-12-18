@@ -1,0 +1,48 @@
+<!--
+    This form is generated automatically from the parameters pluginspec.
+    Please not not edit this file manually as it will be regenerated.
+-->
+<editor>
+  <help>/commander/pages/@PLUGIN_NAME@/help?s=Administration&amp;ss=Plugins#RunGradle</help>
+  <formElement>
+    <type>entry</type>
+    <property>tasks</property>
+    <required>1</required>
+    <documentation>List of the space-separated tasks to execute. e.g. ':mySubproject:taskName clean build' or 'build'</documentation>
+    <label>Tasks:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>options</property>
+    <required>0</required>
+    <documentation>Additional swithes for the gradle command, separated by semicolon. e.g. '-Poption1=value1;--no-daemon'</documentation>
+    <label>Options:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>workspaceDir</property>
+    <required>0</required>
+    <documentation>Specify this if you need directory to be different from the job workspace</documentation>
+    <label>Workspace Dir:</label>
+  </formElement>
+  <formElement>
+    <type>checkbox</type>
+    <property>useWrapper</property>
+    <required>1</required>
+    <documentation>If checked, gradlew executable will be used.</documentation>
+    <label>Use Wrapper?:</label>
+    <checkedValue>true</checkedValue>
+    <initiallyChecked>false</initiallyChecked>
+    <uncheckedValue>false</uncheckedValue>
+  </formElement>
+  <formElement>
+    <type>checkbox</type>
+    <property>saveLogs</property>
+    <required>1</required>
+    <documentation>If checked, gradle log will be saved to /myJob/gradleStdOut and /myJob/gradleStdErr property</documentation>
+    <label>Save Log?:</label>
+    <checkedValue>true</checkedValue>
+    <initiallyChecked>false</initiallyChecked>
+    <uncheckedValue>false</uncheckedValue>
+  </formElement>
+</editor>

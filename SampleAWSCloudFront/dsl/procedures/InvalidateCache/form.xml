@@ -1,0 +1,49 @@
+<!--
+    This form is generated automatically from the parameters pluginspec.
+    Please not not edit this file manually as it will be regenerated.
+-->
+<editor>
+  <help>/commander/pages/@PLUGIN_NAME@/help?s=Administration&amp;ss=Plugins#InvalidateCache</help>
+  <formElement>
+    <type>entry</type>
+    <property>config</property>
+    <configuration>1</configuration>
+    <propertyReference>/plugins/@PLUGIN_NAME@/project/ec_plugin_cfgs</propertyReference>
+    <required>1</required>
+    <documentation>Previously defined configuration for the plugin</documentation>
+    <label>Configuration Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>distributionId</property>
+    <required>1</required>
+    <documentation>The distribution ID associated with the invalidation.</documentation>
+    <label>Distribution ID:</label>
+  </formElement>
+  <formElement>
+    <type>textarea</type>
+    <property>objectPaths</property>
+    <required>1</required>
+    <documentation>Objects paths, newline-separated.</documentation>
+    <label>Object Paths:</label>
+  </formElement>
+  <formElement>
+    <type>checkbox</type>
+    <property>uniqueCallerReference</property>
+    <required>0</required>
+    <documentation>If checked, unique caller reference will be generated automatically.</documentation>
+    <label>Generate Unique Caller Reference:</label>
+    <checkedValue>true</checkedValue>
+    <initiallyChecked>true</initiallyChecked>
+    <uncheckedValue>false</uncheckedValue>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>callerReference</property>
+    <required>0</required>
+    <documentation>Caller reference to identify invalidation request.</documentation>
+    <label>Caller Reference:</label>
+    <condition>${uniqueCallerReference} == 'false'</condition>
+    <dependsOn>uniqueCallerReference</dependsOn>
+  </formElement>
+</editor>
