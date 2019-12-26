@@ -1,0 +1,61 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call flowpdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'SampleJenkins'
+  version: '1.0.0'
+  description: 'Simple showcase of the REST API integration'
+  author: 'Anton Horodchuk'
+  supportUrl: 'none'
+  category: 'Build'
+
+# Plugin configuration description
+configuration:
+  # This is a shell used for checking connection
+  shell: 'ec-groovy'
+  # A script for checking connection will be generated
+  checkConnection: 'true'
+  # A set of fields will be added to process debug level in the configuration
+  hasDebugLevel: true
+  parameters:
+  -
+    name: config
+    documentation: The name for the created configuration
+    required: true
+    type: entry
+    label: Configuration Name
+  -
+    name: desc
+    documentation: Description for the configuration
+    required: false
+    type: entry
+    label: Description
+  -
+    name: endpoint
+    documentation: Third-party endpoint to connect to (Jenkins server URL), e.g. 'http://jenkins:8080/'
+    required: true
+    type: entry
+    label: Endpoint
+  -
+    name: basic_credential
+    documentation: Jenkins credentials
+    required: true
+    type: credential
+    label: Credential
+
+procedures:
+-
+  name: 'GetJenkinsJob'
+  description: 'Saves details for Jenkins job to properties'
+  # configuration field will be generated automatically
+  hasConfig: true
+  shell: 'ec-groovy'
+  parameters:
+  -
+    name: jobName
+    documentation: Name of the Jenkins job.
+    required: true
+    type: entry
+    label: Jenkins Job
+  outputParameters:
+    lastBuildNum: 'Number of the last job build'
