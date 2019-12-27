@@ -2,7 +2,7 @@ pluginInfo:
   pluginName: 'SampleGradle'
   version: '1.0.0'
   description: 'Wrapper for the Gradle CLI'
-  author: 'Plugin Author'
+  author: 'Anton Horodchuk'
   supportUrl: '<>'
   category: 'Utilities'
 
