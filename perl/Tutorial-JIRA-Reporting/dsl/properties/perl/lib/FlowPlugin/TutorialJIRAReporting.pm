@@ -10,6 +10,7 @@ use FlowPDF::Log;
 use FlowPDF::Exception::WrongFunctionArgumentValue;
 use FlowPDF::Exception::MissingFunctionArgument;
 use FlowPDF::Exception::RuntimeException;
+use DateTime;
 # Feel free to use new libraries here, e.g. use File::Temp;
 
 # Service function that is being used to set some metadata for a plugin.
@@ -92,7 +93,7 @@ sub getIssues {
 
     if ($opts->{after}) {
         if ($opts->{after} =~ m/^\d+$/s) {
-            my $dt = DataTime->from_epoch($opts->{after});
+            my $dt = DateTime->from_epoch($opts->{after});
             $opts->{after} = sprintf('%s %s', $dt->ymd(), $dt->hms());
         }
         $tempJQL .= qq| AND updatedDate > "$opts->{after}" ORDER BY updatedDate DESC|;
