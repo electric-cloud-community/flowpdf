@@ -6,7 +6,7 @@ pluginInfo:
   version: '1.0.0'
   description: 'Example of the plugin that uses AWS CloudFront API'
   author: 'Sample Author'
-  supportUrl: '<>'
+  authorUrl: '<>'
   category: 'Utilities'
 
 # Plugin configuration description

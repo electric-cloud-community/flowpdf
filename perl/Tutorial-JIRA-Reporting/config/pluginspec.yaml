@@ -6,7 +6,7 @@ pluginInfo:
   version: '1.0.0'
   description: 'Sample JIRA plugin for reporting tutorial'
   author: 'Sample Author'
-  authorUrl: 'No support URL'
+  authorUrl: '<>'
   category: 'Utilities'
 
 

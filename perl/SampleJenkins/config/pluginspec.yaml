@@ -6,7 +6,7 @@ pluginInfo:
   description: 'A simple and cool jenkins plugin.'
   version: '1.0.0'
   author: 'Sample Author'
-  authorUrl: 'No support URL'
+  authorUrl: '<>'
   category: 'Utilities'
 
 # This is a declaration for the plugin configuration

@@ -3,7 +3,7 @@ pluginInfo:
   version: '1.0.0'
   description: 'Wrapper for the Gradle CLI'
   author: 'Sample Author'
-  supportUrl: '<>'
+  authorUrl: '<>'
   category: 'Utilities'
 
 procedures:

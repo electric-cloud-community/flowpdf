@@ -6,7 +6,7 @@ pluginInfo:
   version: '1.0.0'
   description: 'Simple showcase of the REST API integration'
   author: 'Sample Author'
-  supportUrl: 'none'
+  authorUrl: '<>'
   category: 'Build'
 
 # Plugin configuration description

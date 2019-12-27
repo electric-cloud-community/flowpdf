@@ -6,7 +6,7 @@ pluginInfo:
   version: '1.0.0'
   description: 'Sample plugin to demonstrate auto-generated REST client.'
   author: 'Sample Author'
-  authorUrl: 'No support URL'
+  authorUrl: '<>'
   category: 'Source Control'
 
 # REST-backed plugin configuration

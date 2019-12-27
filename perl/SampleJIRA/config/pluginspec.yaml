@@ -5,7 +5,7 @@ pluginInfo:
   description: Sample plugin to demonstrate REST Integration
   version: 1.0.0
   author: 'Sample Author'
-  supportUrl: No support URL
+  authorUrl: '<>'
   category: Bug Tracking
 
 # This is a declaration for the plugin configuration
