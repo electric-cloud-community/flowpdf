@@ -5,7 +5,7 @@ pluginInfo:
   pluginName: 'asd'
   version: '1.0.0'
   description: 'Sample plugin description'
-  author: 'Plugin Author'
+  author: 'Sample Author'
   supportUrl: '<>'
   category: 'Utilities'
 # The reporting configuration, will generate a procedure and a bunch of configuration scripts required for DOIS to work

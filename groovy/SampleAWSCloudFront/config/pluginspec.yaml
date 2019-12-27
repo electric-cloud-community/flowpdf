@@ -5,7 +5,7 @@ pluginInfo:
   pluginName: 'SampleAWSCloudFront'
   version: '1.0.0'
   description: 'Example of the plugin that uses AWS CloudFront API'
-  author: 'CloudBees'
+  author: 'Sample Author'
   supportUrl: '<>'
   category: 'Utilities'
 

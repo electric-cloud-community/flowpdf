@@ -5,7 +5,7 @@ pluginInfo:
   pluginName: 'SampleGithubREST'
   version: '1.0.0'
   description: 'Sample plugin to demonstrate auto-generated REST client.'
-  author: 'CloudBees'
+  author: 'Sample Author'
   authorUrl: 'No support URL'
   category: 'Source Control'
 

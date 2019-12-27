@@ -4,8 +4,8 @@ pluginInfo:
   pluginName: Sample Glassfish Plugin
   description: Sample plugin to integrate with Glassfish Application Server
   version: 1.0.0
-  author: Sample Author
-  authorUrl: No support URL
+  author: 'Sample Author'
+  authorUrl: 'No support URL'
   category: Application Server
 
 # This is a declaration for the plugin configuration

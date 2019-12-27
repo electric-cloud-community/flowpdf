@@ -4,7 +4,7 @@ pluginInfo:
   pluginName: Sample JIRA Plugin
   description: Sample plugin to demonstrate REST Integration
   version: 1.0.0
-  author: Sample Author
+  author: 'Sample Author'
   supportUrl: No support URL
   category: Bug Tracking
 
