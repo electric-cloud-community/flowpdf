@@ -5,8 +5,6 @@ import com.cloudbees.flowpdf.components.reporting.Reporting
 import net.sf.json.JSONObject
 
 import java.text.SimpleDateFormat
-import java.util.Date
-import java.util.TimeZone
 
 /**
  * User implementation of the reporting classes
@@ -29,41 +27,20 @@ class ReportingSampleJIRAReporting extends Reporting {
     @Override
     List<Map<String, Object>> initialGetRecords(FlowPlugin flowPlugin, int i = 10) {
         def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
-
-        return (flowPlugin as SampleJIRAReporting).getIssues(
-                params['jiraProjectName'],
-                [
-                        limit: i
-                ]
-        )
+        return flowPlugin.getIssues(params['jiraProjectName'], [limit: i])
     }
 
     @Override
     List<Map<String, Object>> getRecordsAfter(FlowPlugin flowPlugin, Metadata metadata) {
         def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
-
         def metadataValue = metadata.getValue()
-
-        return (flowPlugin as SampleJIRAReporting).getIssues(
-                params['jiraProjectName'],
-                [
-                        after: metadataValue['modifiedOn']
-                ]
-        )
+        return flowPlugin.getIssuesAfterDate(params['jiraProjectName'], metadataValue['modifiedOn'])
     }
 
     @Override
     Map<String, Object> getLastRecord(FlowPlugin flowPlugin) {
         def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
-
-        def oneRecordList = (flowPlugin as SampleJIRAReporting).getIssues(
-                params['jiraProjectName'],
-                [
-                        getLastIssue: true
-                ]
-        )
-
-        return oneRecordList[0]
+        return flowPlugin.getLastUpdatedIssue(params['jiraProjectName'])
     }
 
     @Override
