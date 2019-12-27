@@ -5,8 +5,8 @@ pluginInfo:
   pluginName: 'SampleJIRAReporting'
   version: '1.0.0'
   description: 'Sample plugin for a reporting tutorial'
-  author: 'Anton Horodchuk'
-  supportUrl: 'none'
+  author: 'Sample Author'
+  authorUrl: '<>'
   category: 'Utilities'
 # The reporting configuration, will generate a procedure and a bunch of configuration scripts required for DOIS to work
 devOpsInsight:

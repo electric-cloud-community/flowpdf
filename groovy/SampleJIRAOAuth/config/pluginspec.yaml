@@ -2,8 +2,8 @@ pluginInfo:
   pluginName: SampleJIRAOAuth
   version: '1.0.0'
   description: 'Simple showcase of the REST API integration'
-  author: 'Anton Horodchuk'
-  supportUrl: 'none'
+  author: 'Sample Author'
+  authorUrl: '<>'
   category: 'Utility'
   metafile:
     commander-version: 8.3

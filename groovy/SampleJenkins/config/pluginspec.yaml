@@ -5,8 +5,8 @@ pluginInfo:
   pluginName: 'SampleJenkins'
   version: '1.0.0'
   description: 'Simple showcase of the REST API integration'
-  author: 'Anton Horodchuk'
-  supportUrl: 'none'
+  author: 'Sample Author'
+  authorUrl: '<>'
   category: 'Build'
 
 # Plugin configuration description

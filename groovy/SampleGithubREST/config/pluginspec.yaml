@@ -5,8 +5,8 @@ pluginInfo:
   pluginName: 'SampleGithubREST'
   version: '1.0.0'
   description: 'Sample plugin to demonstrate auto-generated REST client.'
-  author: 'Anton Horodchuk'
-  authorUrl: 'No support URL'
+  author: 'Sample Author'
+  authorUrl: '<>'
   category: 'Source Control'
 
 # REST-backed plugin configuration

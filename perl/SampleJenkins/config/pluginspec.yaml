@@ -5,8 +5,8 @@ pluginInfo:
   pluginName: 'SampleJenkins'
   description: 'A simple and cool jenkins plugin.'
   version: '1.0.0'
-  author: 'Dmitriy Shamatrin'
-  authorUrl: 'https://justnoxx.name'
+  author: 'Sample Author'
+  authorUrl: '<>'
   category: 'Utilities'
 
 # This is a declaration for the plugin configuration

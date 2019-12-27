@@ -5,8 +5,8 @@ pluginInfo:
   pluginName: 'SampleReporting'
   description: 'No description'
   version: '1.0.0'
-  author: 'No Name'
-  authorUrl: 'No support URL'
+  author: 'Sample Author'
+  authorUrl: '<>'
   category: 'Utilities'
 
 configuration:

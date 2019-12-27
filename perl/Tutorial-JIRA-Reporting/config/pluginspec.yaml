@@ -5,7 +5,7 @@ pluginInfo:
   pluginName: 'Tutorial-JIRA-Reporting'
   version: '1.0.0'
   description: 'Sample JIRA plugin for reporting tutorial'
-  author: 'CloudBees'
+  author: 'Sample Author'
   authorUrl: '<>'
   category: 'Utilities'
 
