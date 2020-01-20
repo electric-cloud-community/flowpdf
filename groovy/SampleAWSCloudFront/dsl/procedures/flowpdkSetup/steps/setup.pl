@@ -66,7 +66,8 @@ sub fetchFromServer {
     );
 
     my $httpProxy = $ENV{COMMANDER_HTTP_PROXY};
-    if ($httpProxy) {
+    if ($httpProxy && $ElectricCommander::VERSION >= 9.0000) {
+        # Because prior 9.0, the proxy didn't work with rest calls
         $ua->proxy(https => $httpProxy);
         $ua->proxy(http => $httpProxy);
     }
@@ -140,6 +141,53 @@ sub fetchFromDsl {
     return $dependencies;
 }
 
+
+sub setupParentPlugins {
+    my ($self, $pluginsList) = @_;
+
+    for my $plugin (split(/\s+/ => $pluginsList)) {
+        logInfo "Found external plugin dependency: $plugin";
+
+        # my $jobId = $self->ec()->runProcedure({
+        #     projectName => "/plugins/$plugin/project",
+        #     procedureName => "flowpdk-setup",
+        #     resourceName => '$[resourceName]'
+        # })->findvalue('//jobId')->string_value;
+
+        my $jobStepId = $self->ec->createJobStep({
+            subproject => "/plugins/$plugin/project",
+            subprocedure => 'flowpdk-setup',
+            resourceName => '$[resourceName]',
+            errorHandling => 'failProcedure',
+            stepName => "$plugin setup"
+        })->findvalue('//jobStepId');
+
+        logInfo "Launched setup job step for the plugin $plugin, jobStepId: $jobStepId";
+
+        my $status = $self->ec()->getJobStepStatus({
+            jobStepId => $jobStepId
+        });
+
+        logInfo "Waiting for the setup job step...";
+
+        while($status->findvalue('//status') ne 'completed') {
+            sleep 5;
+            $status = $self->ec()->getJobStepStatus($jobStepId);
+        }
+    }
+}
+
+sub isLocalResource {
+    my ($self) = @_;
+
+    my $file = File::Spec->catfile($ENV{COMMANDER_PLUGINS}, '@PLUGIN_NAME@/META-INF');
+    if (-d $file) {
+        logInfo "Working on local resource";
+        return 1;
+    }
+    return 0;
+}
+
 # Auto-generated method for the procedure DeliverDependencies/DeliverDependencies
 # Add your code into this method and it will be called when step runs
 sub deliverDependencies {
@@ -149,9 +197,17 @@ sub deliverDependencies {
     $self->ec->setProperty('/myJob/grabbedResource', $resName);
     $self->ec->setProperty('/myJobStep/parent/flowpdkResource', $resName);
     $self->ec->setProperty('/myJob/flowpdkResource', $resName);
+
+    my $dependsOnPlugins = eval {
+        $self->ec->getPropertyValue('dependsOnPlugins')
+    };
+    if ($dependsOnPlugins) {
+        $self->setupParentPlugins($dependsOnPlugins);
+    }
+
     logInfo "Grabbed resource $resName";
 
-    if ($self->checkCache()) {
+    if ($self->checkCache() || $self->isLocalResource()) {
         print "Local file cache is ok\n";
         $self->copyGrapes();
         $self->copySharedDeps();
@@ -162,11 +218,14 @@ sub deliverDependencies {
     logInfo "Local cache failed, reloading files";
 
     my $source = $self->ec->getPropertyValue('/server/settings/pluginsDirectory') .'/@PLUGIN_NAME@/agent';
+    logInfo "Fetching dependencies from $source";
     my $dest = File::Spec->catfile($ENV{COMMANDER_PLUGINS}, '@PLUGIN_NAME@/agent');
     mkpath($dest);
     my $dependencies;
-    # TODO add check version when there is one
-    if (0) {
+
+    my $serverVersion = $self->ec()->getVersions()->findvalue('//serverVersion/version')->string_value;
+    logInfo "Server version is $serverVersion";
+    if (compareMinor($serverVersion, '9.3') >= 0) {
         $dependencies = $self->fetchFromServer($dest);
     }
     else {
@@ -202,7 +261,9 @@ sub configureClasspath {
     my ($self) = @_;
 
     # Now configuring classpath
-    my $generateClasspathFromFolders = $self->ec->getPropertyValue('generateClasspathFromFolders');
+    my $generateClasspathFromFolders = eval {
+        $self->ec->getPropertyValue('generateClasspathFromFolders')
+    };
     return unless $generateClasspathFromFolders;
 
     logInfo "generateClasspathFromFolders: $generateClasspathFromFolders";
@@ -212,12 +273,12 @@ sub configureClasspath {
     for my $folder (split /\,\s*/ => $generateClasspathFromFolders) {
         my $path = File::Spec->catfile($ENV{COMMANDER_PLUGINS}, '@PLUGIN_NAME@/agent/' . $folder);
         if (-d $path) {
-            if ($path !~ /\/$/) {
-                $path .= '/';
-            }
-            $path .= '*';
-            logInfo "Adding folder $path to classpath";
-            push @jars, $path;
+            my $libPath = File::Spec->catfile($path, "*");
+            logInfo "Adding folder $libPath to classpath";
+            push @jars, $libPath;
+        }
+        else {
+            logInfo "The path $path is not a directory";
         }
     }
 
@@ -230,8 +291,9 @@ sub configureClasspath {
     unless($classpath) {
         die "Failed to generate classpath: classpath is empty.";
     }
-    $self->ec->setProperty({propertyName => '/myJob/flowpdk_classpath', value => $classpath});
+    $self->ec->setProperty({propertyName => '/myJob/flowpdk_classpath', value => qq{"$classpath"}});
     logInfo "Classpath: $classpath\n";
+
 }
 
 sub copyGrapes {
