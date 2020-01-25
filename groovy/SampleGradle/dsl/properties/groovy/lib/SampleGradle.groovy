@@ -49,8 +49,10 @@ class SampleGradle extends FlowPlugin {
             workspaceDir = System.getProperty('user.dir')
         }
 
-        /** Creating the Command */
+        /** Instantiating CLI component with a ComponentManager */
         CLI cli = (CLI) ComponentManager.loadComponent(CLI.class, [workingDirectory: workspaceDir], this)
+
+        /** Creating a Command instance */
         Command cmd = cli.newCommand(executableName, tasks)
 
         if (options.size() > 0) {
