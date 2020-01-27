@@ -1,4 +1,4 @@
-$[/myProject/groovy/core/scripts/preamble.groovy.ignore]
+$[/myProject/groovy/scripts/preamble.groovy.ignore]
 
-Asd plugin = new Asd()
+SampleReporting plugin = new SampleReporting()
 plugin.runStep('CollectReportingData', 'CollectReportingData', 'collectReportingData')

@@ -2,12 +2,13 @@ pluginInfo:
   # This is default sample specification
   # Feel free to change it
   # Call flowpdk showdoc pluginspec to see the list of available fields and their description
-  pluginName: 'asd'
+  pluginName: 'SampleReporting'
   version: '1.0.0'
   description: 'Sample plugin description'
   author: 'Sample Author'
   authorUrl: '<>'
   category: 'Utilities'
+
 # The reporting configuration, will generate a procedure and a bunch of configuration scripts required for DOIS to work
 devOpsInsight:
   supportedReports:
@@ -16,13 +17,14 @@ devOpsInsight:
     parameters:
     -
       name: param1
-      documentation: null
+      documentation: Example of an additional parameter for the CRD procedure.
       required: true
+      value: sampleValue
       type: entry
-      label: Sample Reporting Parameter
+      label: Sample Reporting Parameter 1
     -
       name: param2
-      documentation: null
+      documentation: Example of an additional parameter for the CRD procedure.
       required: false
       type: entry
       label: Sample Reporting Parameter 2

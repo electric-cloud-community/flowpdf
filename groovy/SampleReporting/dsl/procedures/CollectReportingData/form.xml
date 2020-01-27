@@ -17,12 +17,15 @@
     <type>entry</type>
     <property>param1</property>
     <required>1</required>
-    <label>Sample Reporting Parameter:</label>
+    <documentation>Example of an additional parameter for the CRD procedure.</documentation>
+    <label>Sample Reporting Parameter 1:</label>
+    <value>sampleValue</value>
   </formElement>
   <formElement>
     <type>entry</type>
     <property>param2</property>
     <required>0</required>
+    <documentation>Example of an additional parameter for the CRD procedure.</documentation>
     <label>Sample Reporting Parameter 2:</label>
   </formElement>
   <formElement>

@@ -1,7 +1,7 @@
 // This procedure.dsl was generated automatically
 // DO NOT EDIT THIS BLOCK === procedure_autogen starts ===
 procedure 'CollectReportingData', description: '''''', {
-    property 'standardStepPicker', value: false
+    property 'standardStepPicker', value: true
 
     // Handling binary dependencies
     step 'flowpdk-setup', {
@@ -18,11 +18,11 @@ procedure 'CollectReportingData', description: '''''', {
         shell = 'ec-groovy'
         shell = 'ec-groovy -cp $[/myJob/flowpdk_classpath]'
 
-        resourceName = '$[/myJob/flowpdkResource]'
+        resourceName = '$[flowpdkResource]'
 
         postProcessor = '''$[/myProject/perl/postpLoader]'''
     }
-// DO NOT EDIT THIS BLOCK === procedure_autogen ends, checksum: 3fe19b4f0b3adced76dc6d44896ca1ec ===
+// DO NOT EDIT THIS BLOCK === procedure_autogen ends, checksum: 59c1f536b6ca72fb8eac8fd144b1677e ===
 // Do not update the code above the line
 // procedure properties declaration can be placed in here, like
 // property 'property name', value: "value"

@@ -1,81 +1,66 @@
-import com.cloudbees.flowpdf.*
-import sun.reflect.generics.reflectiveObjects.NotImplementedException
+import com.cloudbees.flowpdf.FlowPlugin
+import com.cloudbees.flowpdf.Log
 import com.cloudbees.flowpdf.components.reporting.Dataset
 import com.cloudbees.flowpdf.components.reporting.Metadata
 import com.cloudbees.flowpdf.components.reporting.Reporting
 
+import java.time.Instant
+
 /**
  * User implementation of the reporting classes
  */
-class ReportingAsd extends Reporting {
+class ReportingSampleReporting extends Reporting {
 
+
+    /*
+    // Default compareMetadata implementation can compare numeric values automatically.
+    // Uncomment and implement additional logic if necessary.
     @Override
     int compareMetadata(Metadata param1, Metadata param2) {
         def value1 = param1.getValue()
         def value2 = param2.getValue()
 
-        def pluginObject = this.getPluginObject()
-        // Return 1 if there are newer records than record to which metadata is pointing.
-        return 1
-    }
-
+        return value2['buildNumber'].compareTo(value1['buildNumber'])
+    }*/
 
     @Override
     List<Map<String, Object>> initialGetRecords(FlowPlugin flowPlugin, int i = 10) {
-        def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
-        println params
-        // def records = (flowPlugin as Asd).getBuildRuns(params['projectKey'], params['planKey'], [
-        //         maxResults: i
-        // ])
+        Map<String, Object> params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
+        flowPlugin.log.logDebug("Initial parameters.\n" + params.toString())
 
-        // $row->{source} = "Test Reporting";
-        // $row->{pluginName} = '@PLUGIN_NAME@';
-        // $row->{projectName} = $context->retrieveCurrentProjectName;
-        // $row->{releaseProjectName} = $params->{releaseProjectName};
-        // $row->{releaseName} = $params->{releaseName};
-        // $row->{timestamp} = $today->ymd . 'T' . $today->hms . '.000Z';
-        // my $status = rand() > 0.5 ? 'SUCCESS' : 'FAILURE';
-        // $row->{buildStatus} = $status;
-        // $row->{pluginConfiguration} = $params->{config};
-        // $row->{endTime} = $today->ymd . 'T' . $today->hms . '.000Z';
-        // $row->{startTime} = $today->ymd . 'T' . $today->hms . '.000Z';
-        // $row->{duration} = (int rand 9839) * 1000;
+        // Generating initial records
+        def records = generateRecords(params, i, 1)
 
-        String status = new Random().nextDouble() > 0.5 ? "SUCCESS" : "FAILURE"
-
-        def record = [
-            source: "Test Reporting",
-            pluginName: "@PLUGIN_NAME@",
-            projectName: params['releaseProjectName'],
-            releaseName: params['releaseName'],
-            timestamp: new Date().toInstant().toString(),
-            buildStatus: status,
-            pluginConfiguration: params['config'],
-            endTime: new Date().toInstant().toString(),
-            startTime : new Date().toInstant().toString(),
-            duration: new Random().nextInt().abs()
-        ]
-        return [record]
+        return records
     }
 
     @Override
     List<Map<String, Object>> getRecordsAfter(FlowPlugin flowPlugin, Metadata metadata) {
         def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
         def metadataValues = metadata.getValue()
-
         def log = flowPlugin.getLog()
-        log.info("Got metadata value in getRecordsAfter:  ${metadataValues.toString()}")
+
+        log.info("\n\nGot metadata value in getRecordsAfter:  ${metadataValues.toString()}")
+
+        // Should generate one build right after the initial set
+        List<Map<String, Object>> records = generateRecords(params, 1, metadataValues['buildNumber'] + 1)
 
         log.info("Records after GetRecordsAfter ${records.toString()}")
-        return []
+
+        return records
     }
 
     @Override
     Map<String, Object> getLastRecord(FlowPlugin flowPlugin) {
         def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
         def log = flowPlugin.getLog()
+
         log.info("Last record runtime params: ${params.toString()}")
-        throw new NotImplementedException()
+
+        // Last record will always be 11th.
+        int initialPos = 11
+
+        return generateRecords(params, 1, initialPos)[0]
     }
 
     @Override
@@ -96,21 +81,17 @@ class ReportingAsd extends Reporting {
                     pluginName         : '@PLUGIN_NAME@',
                     projectName        : context.retrieveCurrentProjectName(),
                     releaseName        : params['releaseName'] ?: '',
-
-                    // releaseUri         : (params['projectKey'] + (params['planKey'] ? "-${params['planKey']}" : '')),
                     releaseProjectName : params['releaseProjectName'] ?: '',
                     pluginConfiguration: params['config'],
                     baseDrilldownUrl   : (params['baseDrilldownUrl'] ?: params['endpoint']) + '/browse/',
-                    buildNumber        : new Random().nextInt().abs(),
+
+                    buildNumber        : row['buildNumber'],
                     timestamp          : row['startTime'],
                     endTime            : row['endTime'],
                     startTime          : row['startTime'],
                     buildStatus        : row['buildStatus'],
                     launchedBy         : 'N/A',
-                    // jobName            : row['key'],
                     duration           : row['duration'],
-                    // tags                : '',
-                    // sourceUrl          : row['link']['href'],
             ]
 
             for (key in payload.keySet()) {
@@ -119,7 +100,7 @@ class ReportingAsd extends Reporting {
                     payload.remove(key)
                 }
             }
-            log.info("procedure buildDataset created payload: ${payload}")
+
             dataset.newData(
                     reportObjectType: 'build',
                     values: payload
@@ -127,6 +108,48 @@ class ReportingAsd extends Reporting {
         }
 
         log.info("Dataset: ${dataset.data}")
+
         return dataset
+    }
+
+    static List<Map<String, Object>> generateRecords(Map<String, Object> params, int count, int startPos = 1) {
+
+        List<Map<String, Object>> generatedRecords = new ArrayList<>()
+
+        for (int i = 0; i < count; i++) {
+            String status = new Random().nextDouble() > 0.5 ? "SUCCESS" : "FAILURE"
+
+            Instant generatedDate = new Date().toInstant()
+
+            int buildNumber = startPos + i
+
+            Log.logInfo("StartPos: $startPos, Generating with build number" + buildNumber)
+
+            // Minus one day
+            generatedDate.minusSeconds(86400)
+
+            // Adding a second, so builds have a time sequence
+            generatedDate.plusSeconds(buildNumber)
+
+            String dateString = generatedDate.toString()
+
+            def record = [
+                    source             : "SampleReporting",
+                    pluginName         : "@PLUGIN_NAME@",
+                    buildNumber        : buildNumber,
+                    projectName        : params['releaseProjectName'],
+                    releaseName        : params['releaseName'],
+                    timestamp          : dateString,
+                    buildStatus        : status,
+                    pluginConfiguration: params['config'],
+                    endTime            : dateString,
+                    startTime          : dateString,
+                    duration           : new Random().nextInt().abs()
+            ]
+
+            generatedRecords += (record)
+        }
+
+        return generatedRecords.reverse()
     }
 }
