@@ -1,12 +1,12 @@
-import sun.reflect.generics.reflectiveObjects.NotImplementedException
-
-import com.cloudbees.flowpdf.*
+import com.cloudbees.flowpdf.components.reporting.Reporting
 import com.cloudbees.flowpdf.components.ComponentManager
 
+import com.cloudbees.flowpdf.*
+
 /**
-* Asd
+* SampleReporting
 */
-class Asd extends FlowPlugin {
+class SampleReporting extends FlowPlugin {
 
     @Override
     Map<String, Object> pluginInfo() {
@@ -19,7 +19,7 @@ class Asd extends FlowPlugin {
         ]
     }
 
-/**
+    /**
     * Procedure parameters:
     * @param config
     * @param param1
@@ -29,24 +29,21 @@ class Asd extends FlowPlugin {
     * @param debug
     * @param releaseName
     * @param releaseProjectName
-
     */
     def collectReportingData(StepParameters paramsStep, StepResult sr) {
         def params = paramsStep.getAsMap()
-
 
         if (params['debug']) {
             log.setLogLevel(log.LOG_DEBUG)
         }
 
-
-        ReportingAsd reporting = (ReportingAsd) ComponentManager.loadComponent(ReportingAsd.class, [
+        Reporting reporting = (Reporting) ComponentManager.loadComponent(ReportingSampleReporting.class, [
                 reportObjectTypes  : ['build'],
-                metadataUniqueKey  : new Random().nextInt().abs(),
+                metadataUniqueKey  : params['param1'] + (params['param2'] ? ('-' + params['param2']) : ''),
                 payloadKeys        : ['buildNumber'],
         ], this)
-        reporting.collectReportingData()
 
+        reporting.collectReportingData()
     }
 // === step ends ===
 

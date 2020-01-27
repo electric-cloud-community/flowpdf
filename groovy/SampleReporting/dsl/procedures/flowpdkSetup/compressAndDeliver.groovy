@@ -35,7 +35,6 @@ return [
     remaining: remaining
 ]
 
-
 File packDependencies(File agentFolder) {
     if (!agentFolder.exists()) {
         throw new RuntimeException("The agent folder $agentFolder does not exist")
@@ -52,8 +51,9 @@ File packDependencies(File agentFolder) {
     agentFolder.eachFileRecurse { File file ->
         if (!file.isDirectory() && !file.name.startsWith('.')) {
             def relative = agentFolder.toPath().relativize(file.toPath())
+            String rel = relative.toString().replaceAll('\\\\', '/')
             try {
-                zipFile.putNextEntry(new ZipEntry(relative.toString()))
+                zipFile.putNextEntry(new ZipEntry(rel))
                 def buffer = new byte[file.size()]
                 file.withInputStream {
                     zipFile.write(buffer, 0, it.read(buffer))
