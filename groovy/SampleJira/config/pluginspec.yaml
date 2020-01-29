@@ -1,0 +1,62 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call flowpdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'SampleJira'
+  version: '1.0.0'
+  description: 'Sample plugin description'
+  author: 'none'
+  supportUrl: 'none'
+  category: 'Utilities'
+  shell: 'ec-groovy'
+
+# Plugin configuration description
+configuration:
+  # This is a shell used for checking connection
+  shell: 'ec-groovy'
+  # A script for checking connection will be generated
+  checkConnection: 'true'
+  # A set of fields will be added to process debug level in the configuration
+  hasDebugLevel: true
+  parameters:
+  -
+    name: config
+    documentation: The name for the created configuration
+    required: true
+    type: entry
+    label: Configuration Name
+  -
+    name: desc
+    documentation: Description for the configuration
+    required: false
+    type: entry
+    label: Description
+  -
+    name: endpoint
+    documentation: Third-party endpoint to connect to (Jira server URL), e.g. 'http://jira:8080/'
+    required: false
+    type: entry
+    label: Endpoint
+  -
+    name: basic_credential
+    documentation: Jira credentials
+    required: false
+    type: credential
+    label: Jira Credential
+
+procedures:
+  -
+    name: 'GetIssue'
+    description: 'Saves details for Jira issue to the properties'
+    # configuration field will be generated automatically
+    hasConfig: true
+    shell: 'ec-groovy'
+    parameters:
+      -
+        name: jiraKey
+        documentation: Key of the issue to retrieve.
+        required: true
+        type: entry
+        label: Jira Key
+    outputParameters:
+      issueStatus: 'Name of the status of the retrieved issue'
