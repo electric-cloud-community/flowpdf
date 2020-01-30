@@ -74,6 +74,14 @@
   </formElement>
   <formElement>
     <type>entry</type>
+    <property>configParameter</property>
+    <required>0</required>
+    <htmlDocumentation>Additional parameter example</htmlDocumentation>
+    <documentation>Additional parameter example</documentation>
+    <label>Configuration parameter:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
     <property>httpProxyUrl</property>
     <required>0</required>
     <documentation>A proxy server URL that should be used for connections.</documentation>

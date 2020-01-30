@@ -7,14 +7,10 @@ pluginInfo:
   description: 'Simple showcase of the REST API integration'
   author: 'Sample Author'
   authorUrl: '<>'
-  category: 'Build'
+  category: 'Utilities'
 
 # Plugin configuration description
 configuration:
-  # This is a shell used for checking connection
-  shell: 'ec-groovy'
-  # A script for checking connection will be generated
-  checkConnection: 'true'
   # A set of fields will be added to process debug level in the configuration
   hasDebugLevel: true
   parameters:

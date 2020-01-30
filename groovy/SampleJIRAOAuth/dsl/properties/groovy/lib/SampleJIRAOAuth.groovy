@@ -32,10 +32,6 @@ class SampleJIRAOAuth extends FlowPlugin {
  * @param jiraIdentifier (required: true)
  */
     def getIssues(StepParameters runtimeParameters, StepResult sr) {
-        log.infoDiag("Info diag")
-        log.warnDiag("Warn diag")
-        log.errorDiag("Error diag")
-
         /* Log is automatically available from the parent class */
         log.info(
                 "getIssues was invoked with StepParameters",
