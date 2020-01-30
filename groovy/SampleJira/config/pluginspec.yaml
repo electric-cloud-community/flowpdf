@@ -5,8 +5,8 @@ pluginInfo:
   pluginName: 'SampleJira'
   version: '1.0.0'
   description: 'Sample plugin description'
-  author: 'none'
-  supportUrl: 'none'
+  author: 'Sample Author'
+  supportUrl: '<>'
   category: 'Utilities'
   shell: 'ec-groovy'
 

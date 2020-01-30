@@ -2,12 +2,12 @@
 <plugin>
   <key>SampleJira</key>
   <label>SampleJira</label>
-  <author>none</author>
+  <author>Sample Author</author>
   <category>Utilities</category>
   <description>Sample plugin description</description>
   <configure>ec_config</configure>
   <version>1.0.0</version>
-  <authorUrl>none</authorUrl>
+  <authorUrl>&lt;&gt;</authorUrl>
   <help>help.xml</help>
   <depends min='1.4.1'>EC-PluginManager</depends>
   <commander-version min='6.0' />
