@@ -7,7 +7,7 @@ pluginInfo:
   description: 'Simple showcase of the REST API integration'
   author: 'Sample Author'
   authorUrl: '<>'
-  category: 'Build'
+  category: 'Utilities'
 
 # Plugin configuration description
 configuration:
