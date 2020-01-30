@@ -1,20 +1,21 @@
-import com.cloudbees.flowpdf.*
-import com.cloudbees.flowpdf.client.*
+import com.cloudbees.flowpdf.FlowPlugin
+import com.cloudbees.flowpdf.StepParameters
+import com.cloudbees.flowpdf.StepResult
 import groovy.json.JsonOutput
 
 /**
-* SampleJira
-*/
+ * SampleJira
+ */
 class SampleJira extends FlowPlugin {
 
     @Override
     Map<String, Object> pluginInfo() {
         return [
-                pluginName     : '@PLUGIN_KEY@',
-                pluginVersion  : '@PLUGIN_VERSION@',
-                configFields   : ['config'],
-                configLocations: ['ec_plugin_cfgs'],
-                defaultConfigValues: [ authScheme : 'basic' ]
+                pluginName         : '@PLUGIN_KEY@',
+                pluginVersion      : '@PLUGIN_VERSION@',
+                configFields       : ['config'],
+                configLocations    : ['ec_plugin_cfgs'],
+                defaultConfigValues: [authScheme: 'basic']
         ]
     }
 
@@ -56,9 +57,10 @@ class SampleJira extends FlowPlugin {
         log.debug("Issue JSON: " + jsonIssuesStr)
 
         sr.setOutcomeProperty('/myCall/issue', jsonIssuesStr)
+        String issueStatus = issue?.fields?.status?.name ?: 'no status'
+        log.info("Issue status is: ${issueStatus}")
 
         // Setting outputs
-        String issueStatus = issue?.fields?.status?.name ?: 'no status'
         sr.setOutputParameter('issueStatus', issueStatus)
         sr.setPipelineSummary("Issue number", issueIdentifier)
         sr.setJobSummary("Issue status is ${issueStatus}")
