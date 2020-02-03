@@ -11,17 +11,17 @@ import java.time.Instant
  */
 class ReportingSampleReporting extends Reporting {
 
-
-    /*
-    // Default compareMetadata implementation can compare numeric values automatically.
-    // Uncomment and implement additional logic if necessary.
+    /**
+     *  Default compareMetadata implementation can compare numeric values automatically
+     *  This code is here only as a reference.
+    */
     @Override
     int compareMetadata(Metadata param1, Metadata param2) {
         def value1 = param1.getValue()
         def value2 = param2.getValue()
 
         return value2['buildNumber'].compareTo(value1['buildNumber'])
-    }*/
+    }
 
     @Override
     List<Map<String, Object>> initialGetRecords(FlowPlugin flowPlugin, int i = 10) {
@@ -29,9 +29,7 @@ class ReportingSampleReporting extends Reporting {
         flowPlugin.log.logDebug("Initial parameters.\n" + params.toString())
 
         // Generating initial records
-        def records = generateRecords(params, i, 1)
-
-        return records
+        return generateRecords(params, i, 1)
     }
 
     @Override
@@ -43,18 +41,13 @@ class ReportingSampleReporting extends Reporting {
         log.info("\n\nGot metadata value in getRecordsAfter:  ${metadataValues.toString()}")
 
         // Should generate one build right after the initial set
-        List<Map<String, Object>> records = generateRecords(params, 1, metadataValues['buildNumber'] + 1)
-
-        log.info("Records after GetRecordsAfter ${records.toString()}")
-
-        return records
+        return generateRecords(params, 1, metadataValues['buildNumber'] + 1)
     }
 
     @Override
     Map<String, Object> getLastRecord(FlowPlugin flowPlugin) {
         def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
         def log = flowPlugin.getLog()
-
         log.info("Last record runtime params: ${params.toString()}")
 
         // Last record will always be 11th.
@@ -72,10 +65,9 @@ class ReportingSampleReporting extends Reporting {
         def log = plugin.getLog()
         log.info("Start procedure buildDataset")
 
-        log.info("buildDataset received params: ${params}")
-        println records
+        log.debug("buildDataset received params: ${params}")
 
-        for (def row in records.reverse()) {
+        for (def row in records) {
             def payload = [
                     source             : 'Test Source',
                     pluginName         : '@PLUGIN_NAME@',
@@ -112,25 +104,28 @@ class ReportingSampleReporting extends Reporting {
         return dataset
     }
 
+    /**
+     * Generating test records (imagine this is your Reporting System)
+     * @param params CollectReportingData procedure parameters
+     * @param count number of records to generate
+     * @param startPos first build number for the generated sequence
+     * @return List of raw records
+     */
     static List<Map<String, Object>> generateRecords(Map<String, Object> params, int count, int startPos = 1) {
 
         List<Map<String, Object>> generatedRecords = new ArrayList<>()
 
         for (int i = 0; i < count; i++) {
             String status = new Random().nextDouble() > 0.5 ? "SUCCESS" : "FAILURE"
-
             Instant generatedDate = new Date().toInstant()
-
             int buildNumber = startPos + i
-
             Log.logInfo("StartPos: $startPos, Generating with build number" + buildNumber)
 
             // Minus one day
             generatedDate.minusSeconds(86400)
 
-            // Adding a second, so builds have a time sequence
+            // Adding a seconds, so builds have a time sequence
             generatedDate.plusSeconds(buildNumber)
-
             String dateString = generatedDate.toString()
 
             def record = [
@@ -150,6 +145,6 @@ class ReportingSampleReporting extends Reporting {
             generatedRecords += (record)
         }
 
-        return generatedRecords.reverse()
+        return generatedRecords
     }
 }
