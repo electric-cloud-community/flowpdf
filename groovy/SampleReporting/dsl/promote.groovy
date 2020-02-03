@@ -42,7 +42,7 @@ project pluginName, {
     property 'ec_devops_insight', {
 
     property 'build', {
-        property 'source', value: 'My Source Name'
+        property 'source', value: 'Sample Reporting Source'
 
     }
 }
@@ -51,7 +51,7 @@ project pluginName, {
 def retainedProperties = []
 
 upgrade(upgradeAction, pluginName, otherPluginName, stepsWithAttachedCredentials, 'ec_plugin_cfgs', retainedProperties)
-// DO NOT EDIT THIS BLOCK === promote_autogen ends, checksum: 2faa3cfbeae7f66867dbf464eb83039b ===
+// DO NOT EDIT THIS BLOCK === promote_autogen ends, checksum: e404f8201e608e6c6a95effa05b5ac26 ===
 // Do not edit the code above this line
 
 project pluginName, {

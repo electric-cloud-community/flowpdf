@@ -18,7 +18,7 @@
     <property>param1</property>
     <required>1</required>
     <documentation>Example of an additional parameter for the CRD procedure.</documentation>
-    <label>Sample Reporting Parameter 1:</label>
+    <label>Test 1:</label>
     <value>sampleValue</value>
   </formElement>
   <formElement>
@@ -26,7 +26,7 @@
     <property>param2</property>
     <required>0</required>
     <documentation>Example of an additional parameter for the CRD procedure.</documentation>
-    <label>Sample Reporting Parameter 2:</label>
+    <label>Test 2:</label>
   </formElement>
   <formElement>
     <type>checkbox</type>

@@ -21,15 +21,15 @@ devOpsInsight:
       required: true
       value: sampleValue
       type: entry
-      label: Sample Reporting Parameter 1
+      label: Test 1
     -
       name: param2
       documentation: Example of an additional parameter for the CRD procedure.
       required: false
       type: entry
-      label: Sample Reporting Parameter 2
+      label: Test 2
   # The name of the source as it will appear in the dashboards
-  datasourceName: 'My Source Name'
+  datasourceName: 'Sample Reporting Source'
   language: 'groovy'
 
 # Plugin configuration description

@@ -76,7 +76,8 @@ class SampleGradle extends FlowPlugin {
             }
 
             if (!result.isSuccess()) {
-                log.errorDiag(result.getStdErr())
+                log.errorDiag("Standard output: " + result.getStdOut())
+                log.errorDiag("Standard err: " + result.getStdErr())
                 sr.setJobStepOutcome('error')
             }
 

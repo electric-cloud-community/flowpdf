@@ -1,7 +1,7 @@
 // This procedure.dsl was generated automatically
 // DO NOT EDIT THIS BLOCK === procedure_autogen starts ===
 procedure 'CollectReportingData', description: '''''', {
-    property 'standardStepPicker', value: true
+    property 'standardStepPicker', value: false
 
     // Handling binary dependencies
     step 'flowpdk-setup', {
