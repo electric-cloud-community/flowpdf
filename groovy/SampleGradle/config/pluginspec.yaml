@@ -1,0 +1,44 @@
+pluginInfo:
+  pluginName: 'SampleGradle'
+  version: '1.0.0'
+  description: 'Wrapper for the Gradle CLI'
+  author: 'Sample Author'
+  authorUrl: '<>'
+  category: 'Utilities'
+
+procedures:
+  - name: 'Run Gradle'
+    description: 'Runs gradle tasks with options'
+    shell: 'ec-groovy'
+    parameters:
+      - name: tasks
+        documentation: List of the space-separated tasks to execute. e.g. ':mySubproject:taskName clean build' or 'build'
+        required: true
+        type: entry
+        label: Tasks
+      - name: options
+        documentation: Additional swithes for the gradle command, separated by semicolon. e.g. '-Poption1=value1;--no-daemon'
+        required: false
+        type: entry
+        label: Options
+      - name: workspaceDir
+        documentation: Specify this if you need directory to be different from the job workspace
+        type: entry
+        label: Workspace Dir
+        required: false
+      - name: useWrapper
+        documentation: If checked, gradlew executable will be used.
+        required: true
+        initiallyChecked: false
+        checkedValue: true
+        uncheckedValue: false
+        type: checkbox
+        label: Use Wrapper?
+      - name: saveLogs
+        documentation: If checked, gradle log will be saved to /myJob/gradleStdOut and /myJob/gradleStdErr property
+        required: true
+        initiallyChecked: false
+        checkedValue: true
+        uncheckedValue: false
+        type: checkbox
+        label: Save Log?

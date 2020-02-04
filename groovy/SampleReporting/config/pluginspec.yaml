@@ -1,0 +1,63 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call flowpdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'SampleReporting'
+  version: '1.0.0'
+  description: 'Sample plugin description'
+  author: 'Sample Author'
+  authorUrl: '<>'
+  category: 'Utilities'
+
+# The reporting configuration, will generate a procedure and a bunch of configuration scripts required for DOIS to work
+devOpsInsight:
+  supportedReports:
+  -
+    reportObjectType: 'build'
+    parameters:
+    -
+      name: param1
+      documentation: Example of an additional parameter for the CRD procedure.
+      required: true
+      value: sampleValue
+      type: entry
+      label: Test 1
+    -
+      name: param2
+      documentation: Example of an additional parameter for the CRD procedure.
+      required: false
+      type: entry
+      label: Test 2
+  # The name of the source as it will appear in the dashboards
+  datasourceName: 'Sample Reporting Source'
+  language: 'groovy'
+
+# Plugin configuration description
+configuration:
+  # A set of fields will be added to process debug level in the configuration
+  hasDebugLevel: true
+  parameters:
+  -
+    name: config
+    documentation: The name for the created configuration
+    required: true
+    type: entry
+    label: Configuration Name
+  -
+    name: desc
+    documentation: Description for the configuration
+    required: false
+    type: entry
+    label: Description
+  -
+    name: endpoint
+    documentation: Third-party endpoint to connect to.
+    required: false
+    type: entry
+    label: Endpoint
+  -
+    name: credential
+    documentation: A sample credential
+    required: true
+    type: credential
+    label: Credential

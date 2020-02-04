@@ -1,0 +1,147 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call flowpdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'SampleGithubREST'
+  version: '1.0.0'
+  description: 'Sample plugin to demonstrate auto-generated REST client.'
+  author: 'Sample Author'
+  authorUrl: '<>'
+  category: 'Source Control'
+
+# REST-backed plugin configuration
+configuration:
+  checkConnection: true
+  restConfigInfo:
+    endpointLabel: 'Github Endpoint'
+    endpointDescription: Endpoint to connect to.
+    checkConnectionUri: '/user'
+    defaultEndpointValue: https://api.github.com
+    headers:
+      Accept: 'application/json'
+    authSchemes:
+      basic:
+        userNameLabel: 'Username'
+        passwordLabel: 'Password'
+        description: 'Username and password to connect to ...'
+      bearer:
+        passwordLabel: 'Bearer token'
+        description: 'Bearer token to connect to Github.'
+      anonymous:
+        checkConnectionUri: '/emojis'
+  hasProxySupport: true
+  hasDebugLevel: true
+
+
+restClient:
+  userAgent: My Github Client
+  language: perl
+  endpoints:
+    - methodName: uploadReleaseAsset
+      httpMethod: POST
+      parameters:
+        - name: name
+          in: query
+        - name: repositoryOwner
+          in: path
+        - name: releaseId
+          in: path
+        - name: repositoryName
+          in: path
+      url: /repos/{{repositoryOwner}}/{{repositoryName}}/releases/{{releaseId}}/assets
+
+    - methodName: getReleaseByTagName
+      httpMethod: GET
+      url: /repos/{{repositoryOwner}}/{{repositoryName}}/releases/tags/{{tag}}
+      parameters:
+        - name: name
+          in: query
+        - name: repositoryOwner
+          in: path
+        - name: tag
+          in: path
+        - name: repositoryName
+          in: path
+
+
+procedures:
+-
+  name: 'Get User'
+  description: 'This procedure downloads the specified user data'
+  hasConfig: true
+  shell: 'ec-perl'
+  parameters:
+  -
+    name: username
+    documentation: Name of the github user, e.g. 'octocat'
+    required: true
+    type: entry
+    label: Username
+    restParamInfo:
+      in: path
+  restProcedureInfo:
+    url: '/users/{{username}}'
+    methodName: 'getUser'
+    httpMethod: 'GET'
+
+-
+  name: 'Create Release'
+  description: 'This procedure creates a Github release from the specified assets'
+  hasConfig: true
+  shell: 'ec-perl'
+  parameters:
+  -
+    name: repositoryOwner
+    documentation: Repository owner name, either user or organization.
+    required: true
+    type: entry
+    label: Repository Owner
+    restParamInfo:
+      in: path
+  -
+    name: repositoryName
+    documentation: Repository name, e.g. my-repo
+    required: true
+    type: entry
+    label: Repository Name
+    restParamInfo:
+      in: path
+  -
+    name: tagName
+    documentation: Tag name for the release, e.g. v1.0
+    required: true
+    type: entry
+    label: Tag Name
+    restParamInfo:
+      in: body
+      name: tag_name
+  -
+    name: name
+    documentation: Name for the release
+    required: false
+    type: entry
+    label: Release Name
+    restParamInfo:
+      in: body
+
+  -
+    name: assetName
+    documentation: Release asset name, e.g. myfile.zip
+    required: true
+    type: entry
+    label: Release Asset Name
+
+  -
+    name: assetPath
+    documentation: Release asset path, e.g. /tmp/myfile.zip
+    required: true
+    type: entry
+    label: Release Asset Path
+
+  restProcedureInfo:
+    url: '/repos/{{repositoryOwner}}/{{repositoryName}}/releases'
+    methodName: 'createRelease'
+    contentType: application/json
+    httpMethod: 'POST'
+
+

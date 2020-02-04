@@ -1,0 +1,95 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  pluginName: Sample JIRA Plugin
+  description: Sample plugin to demonstrate REST Integration
+  version: 1.0.0
+  author: 'Sample Author'
+  authorUrl: '<>'
+  category: Bug Tracking
+
+# This is a declaration for the plugin configuration
+configuration:
+  shell: ec-perl
+  parameters:
+   - name: config
+     type: entry
+     label: Configuration Name
+     required: true
+     documentation: The name for the created configuration
+   - name: jiraUrl
+     type: entry
+     label: URL of JIRA Server
+     required: true
+     documentation: URL of jira server.
+   - name: authType
+     label: Auth Type
+     type: select
+     required: true
+     value: Basic
+     options:
+       - name: Basic
+         value: Basic
+       - name: OAuth1.0
+         value: OAuth1.0
+   - name: credential
+     type: credential
+     label: Credential
+     userNameLabel: Username
+     required: true
+     passwordLabel: Password
+     dependsOn: authType
+     condition: '${authType} == "Basic"'
+   - name: oauth_credential
+     type: credential
+     label: Oauth Credential
+     userNameLabel: Oauth Token
+     required: false
+     passwordLabel: Private Key
+     dependsOn: authType
+     condition: '${authType} == "OAuth1.0"'
+     credentialType: key
+   - name: oauthConsumerKey
+     type: entry
+     label: OAUth 1.0 Consumer Key
+     required: 0
+     documentation: An OAuth 1.0 Consumer Key
+     dependsOn: authType
+     condition: '${authType} == "OAuth1.0"' # the field will be shown only if authType is selected and equals OAuth1.0
+   - name: httpProxyUrl
+     type: entry
+     label: HTTP proxy Address
+     required: false
+     documentation: A url that should be used as proxy URL.
+   - name: proxy_credential
+     type: credential
+     label: Proxy Credential
+     userNameLabel: Username
+     required: false
+     passwordLabel: Password
+   - name: debugLevel
+     label: Debug Level
+     type: select
+     required: 0
+     value: 0
+     options:
+       - name: Info
+         value: 0
+       - name: Debug
+         value: 1
+       - name: Trace
+         value: 2
+
+procedures:
+- name: Get Issue
+  description: Gets issue by its id
+  hasConfig: true # configuration field will be generated automatically
+  parameters:
+  - name: issueId # this is the parameter name to be used in the plugin code to retrieve the specified parameter
+    documentation: An id for jira issue to be retrieved. # this is the parameter documentation to be shown in the form
+    type: entry
+    required: true
+    label: Issue ID
+  outputParameters:
+    issue: An issue details
+  shell: ec-perl

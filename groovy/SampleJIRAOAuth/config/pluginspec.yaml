@@ -1,0 +1,56 @@
+pluginInfo:
+  pluginName: SampleJIRAOAuth
+  version: '1.0.0'
+  description: 'Simple showcase of the REST API integration'
+  author: 'Sample Author'
+  authorUrl: '<>'
+  category: 'Utility'
+  metafile:
+    commander-version: 8.3
+
+
+configuration:
+  checkConnection: true
+  parameters:
+    - name: configParameter
+      label: Configuration parameter
+      required: false
+      type: entry
+      htmlDocumentation: Additional parameter example
+      documentation: Additional parameter example
+  restConfigInfo:
+    endpointDescription: Link to the JIRA site
+    endpointLabel: REST Endpoint
+    checkConnectionUri: /rest/api/2/mypermissions
+    headers: {Accept: "application/json"}
+    authSchemes:
+      oauth1:
+        consumerKeyLabel: Consumer Key
+        consumerKeyDescription: Consumer key is name of your OAuth configuration
+        credentialLabel: OAuth Credential
+        tokenLabel: OAuth Token
+        tokenDescription: Specify your RSA private key in the password field ( in a single line ) in a PEM or DER format.
+      basic:
+        userNameLabel: User Name
+        passwordLabel: Password/Token
+        description: Please provide username and password/token to use for the connection.
+        credentialLabel: Basic/Token credential
+      anonymous:
+        checkConnectionUri: /rest/api/2/mypermissions
+  customCheckConnection: false
+  hasDebugLevel: true
+  hasProxySupport: true
+
+procedures:
+  - name: GetIssues
+    description: Sample procedure description
+    hasConfig: true
+    parameters:
+      - name: jiraIdentifier
+        description: ID or the JQL query for of the issues to retrieve.
+        type: entry
+        required: true
+        label: Issue ID
+    outputParameters:
+      issueIds: Ids of the retrieved issues.
+    shell: ec-groovy

@@ -1,0 +1,26 @@
+apply plugin: 'groovy'
+
+repositories{
+    mavenCentral()
+    flatDir dirs: 'agent/deps/libs'
+}
+
+dependencies{
+    implementation 'org.codehaus.groovy:groovy-all:2.5.8'
+    implementation 'com.electriccloud.plugins:flowpdf-groovy-lib:1.0.0.0'
+    compile group: 'org.codehaus.groovy.modules.http-builder', name: 'http-builder', version: '0.7.1'
+}
+
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['dsl/properties/groovy/lib']
+        }
+    }
+}
+
+task copyDependencies(type: Copy) {
+    from configurations.compile
+    into 'agent/deps/libs'
+}
