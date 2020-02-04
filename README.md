@@ -19,7 +19,7 @@ A detailed **Plugin Developer Guide** is provided below for further reference.
 
 [Download flowpdk](https://flowpdf-libraries.s3.amazonaws.com/flowpdf-cli.zip)
 
-Latest Version: 2.1.0.1
+Latest Version: 2.1.0.2
 
 Release Date: 3/02/2020
 
