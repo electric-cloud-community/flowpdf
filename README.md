@@ -19,9 +19,9 @@ A detailed **Plugin Developer Guide** is provided below for further reference.
 
 [Download flowpdk](https://flowpdf-libraries.s3.amazonaws.com/flowpdf-cli.zip)
 
-Latest Version: 2.0.0.1
+Latest Version: 2.1.0.1
 
-Release Date: 1/11/2019
+Release Date: 3/02/2020
 
 ## Plugin Developer Guide
 
@@ -35,6 +35,12 @@ Refer to [Release Notes Section](https://plugin-dev-guide.s3-us-west-1.amazonaws
 
 ## Sample Plugins built with flowpdf
 
-1. Refer to [SampleJIRA Plugin](SampleJIRA/README.md) for a plugin that uses Rest API to integrate with JIRA.
+### Perl
 
-2. Refer to [SampleGlassfish Plugin](SampleGlassfish/README.md) for a plugin that uses CLI to integrate with Glassfish Application Server.
+1. Refer to [SampleJIRA Plugin](perl/SampleJIRA/README.md) for a plugin that uses Rest API to integrate with JIRA.
+
+2. Refer to [SampleGlassfish Plugin](perl/SampleGlassfish/README.md) for a plugin that uses CLI to integrate with Glassfish Application Server.
+
+3. Refer to [SampleGithubREST Plugin](perl/SampleGithubREST/README.md) for a plugin that uses REST generattor to integrate with Github.
+
+4. Refer to [SampleReporting Plugin](perl/SampleReporting/README.md) for a plugin that uses Reporting Framework to integrate withh DOIS.
