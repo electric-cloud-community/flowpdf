@@ -14,6 +14,8 @@ use File::Path qw(mkpath);
 use File::Temp q(tempfile);
 use File::Copy::Recursive qw(rcopy);
 
+$|++;
+
 use constant {
     META_PROPERTY => '/myProject/ec_binary_dependencies',
     DEPS_CACHE => "depsCache",
@@ -68,8 +70,8 @@ sub fetchFromServer {
     my $httpProxy = $ENV{COMMANDER_HTTP_PROXY};
     if ($httpProxy && $ElectricCommander::VERSION >= 9.0000) {
         # Because prior 9.0, the proxy didn't work with rest calls
-        $ua->proxy(https => $httpProxy);
-        $ua->proxy(http => $httpProxy);
+        # $ua->proxy(https => $httpProxy);
+        # $ua->proxy(http => $httpProxy);
     }
 
     my $protocol = $ENV{COMMANDER_SECURE} ? 'https' : 'http';

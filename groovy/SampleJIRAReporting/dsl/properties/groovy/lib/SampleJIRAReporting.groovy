@@ -5,7 +5,8 @@ import com.cloudbees.flowpdf.StepResult
 import com.cloudbees.flowpdf.client.REST
 import com.cloudbees.flowpdf.components.ComponentManager
 import com.cloudbees.flowpdf.components.reporting.Reporting
-import com.cloudbees.flowpdf.exceptions.*
+import com.cloudbees.flowpdf.exceptions.UnexpectedMissingValue
+import com.cloudbees.flowpdf.Log
 
 import java.text.SimpleDateFormat
 
@@ -46,7 +47,7 @@ class SampleJIRAReporting extends FlowPlugin {
         Reporting reporting = (Reporting) ComponentManager.loadComponent(ReportingSampleJIRAReporting.class, [
                 reportObjectTypes: ['feature'],
                 metadataUniqueKey: params['jiraProjectName'],
-                payloadKeys      : ['key', 'modifiedOn'],
+                payloadKeys      : ['key', 'modifiedOn']
         ] as Map<String, Object>, this)
 
         reporting.collectReportingData()
@@ -55,30 +56,23 @@ class SampleJIRAReporting extends FlowPlugin {
     def get(String path, Map<String, String> queryParams) {
         Context context = getContext()
         REST rest = context.newRESTClient()
-
-        return rest.request('GET', path, queryParams)
+        Log.logDebug("Query Parameters", queryParams)
+        return rest.request('GET', '/rest/api/2/' + path, queryParams)
     }
 
     def getIssues(String projectName, Map<String, String> opts) {
-        Map<String, String> runtimeParameters = getContext().getRuntimeParameters().getAsMap()
-
-        String storyJql = "project=$projectName AND issuetype=Story ORDER BY updatedDate ASC"
-
-        def requestParams = [jql: storyJql]
-
+        def requestParams = [jql: "project=$projectName AND issuetype=Story ORDER BY updatedDate DESC"]
         if (opts['limit']) {
             requestParams['maxResults'] = opts['limit']
         }
-
-        def issues = get('/rest/api/2/search', requestParams)
-
+        def issues = get('search', requestParams)
         return issues['issues']
     }
 
     def getLastUpdatedIssue(String projectName) {
         String lastJql = "project=$projectName AND issuetype=Story ORDER BY updatedDate DESC"
 
-        def result = get('/rest/api/2/search', [jql: lastJql, maxResults: '1'])
+        def result = get('search', [jql: lastJql, maxResults: '1'])
         if (result['total'] > 0 && result.issues.size()) {
             return result['issues'][0]
         }
@@ -87,37 +81,44 @@ class SampleJIRAReporting extends FlowPlugin {
     }
 
     def getIssuesAfterDate(String projectName, String lastUpdateDateISO) {
-        // Metadata contains data in ISO format. Should convert it to JIRA format
-        SimpleDateFormat devopsDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-        Date parsedDate = devopsDateFormat.parse(lastUpdateDateISO)
+        String jqlFormattedDate = isoDatetimeToJqlDatetime(lastUpdateDateISO)
+        String storyJql = "project='$projectName' AND issuetype=Story AND updatedDate >= \"${jqlFormattedDate}\" ORDER BY updatedDate DESC"
 
-        // Valid formats include: 'yyyy/MM/dd HH:mm', 'yyyy-MM-dd HH:mm', 'yyyy/MM/dd', 'yyyy-MM-dd'
-        SimpleDateFormat jqlDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
-
-        // The timezone should be adjusted to jira value
-        jqlDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
-        String jiraFormattedDate = jqlDateFormat.format(parsedDate)
-
-        String storyJql = "project='$projectName' AND issuetype=Story AND updatedDate >= \"${jiraFormattedDate}\" ORDER BY updatedDate ASC"
-
-        def result = get('/rest/api/2/search', [jql: storyJql])
+        def result = get('search', [jql: storyJql])
         if (result['total'] > 0 && result.issues.size()) {
             return result['issues']
         }
 
-        throw new UnexpectedMissingValue("JIRA did not return issue updated after ${jiraFormattedDate}. Check the timezone.")
+        throw new UnexpectedMissingValue("JIRA did not return issue updated after ${jqlFormattedDate}. Check the timezone.")
     }
 
-    String jiraDateStringToISODatetime(String rawDate) {
+    String jiraDatetimeToISODatetime(String rawDate) {
         if (rawDate == null || !rawDate) return ''
 
         SimpleDateFormat jiraDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+        jiraDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
         Date parsedDate = jiraDateFormat.parse(rawDate)
 
         SimpleDateFormat devopsDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
         devopsDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
 
         String formatted = devopsDateFormat.format(parsedDate)
+
+        return formatted
+    }
+
+    String isoDatetimeToJqlDatetime(String isoDate) {
+        SimpleDateFormat devopsDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+        devopsDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
+        Date parsedDate = devopsDateFormat.parse(isoDate)
+
+        SimpleDateFormat jqlDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm")
+        jqlDateFormat.setTimeZone(TimeZone.getTimeZone("UTC"))
+
+        // The timezone here should be adjusted to Jira value
+        String jiraFormattedDate = jqlDateFormat.format(parsedDate)
+
+        return jiraFormattedDate
     }
 
 // === step ends ===
