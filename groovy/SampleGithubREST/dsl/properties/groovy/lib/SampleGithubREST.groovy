@@ -68,7 +68,6 @@ class SampleGithubREST extends FlowPlugin {
             release = response
             log.info "Created release: $release"
         }
-        //TODO asset
 
         String htmlUrl = release.html_url
         sr.setReportUrl("Release URL", htmlUrl)
