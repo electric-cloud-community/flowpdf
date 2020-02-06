@@ -6,7 +6,6 @@ import com.cloudbees.flowpdf.client.REST
 import com.cloudbees.flowpdf.components.ComponentManager
 import com.cloudbees.flowpdf.components.reporting.Reporting
 import com.cloudbees.flowpdf.exceptions.UnexpectedMissingValue
-import com.cloudbees.flowpdf.Log
 
 import java.text.SimpleDateFormat
 
@@ -52,11 +51,11 @@ class SampleJIRAReporting extends FlowPlugin {
 
         reporting.collectReportingData()
     }
+// === step ends ===
 
     def get(String path, Map<String, String> queryParams) {
         Context context = getContext()
         REST rest = context.newRESTClient()
-        Log.logDebug("Query Parameters", queryParams)
         return rest.request('GET', '/rest/api/2/' + path, queryParams)
     }
 
@@ -76,20 +75,7 @@ class SampleJIRAReporting extends FlowPlugin {
         if (result['total'] > 0 && result.issues.size()) {
             return result['issues'][0]
         }
-
-        throw new UnexpectedMissingValue("JIRA did not returned last updated issue.")
-    }
-
-    def getIssuesAfterDate(String projectName, String lastUpdateDateISO) {
-        String jqlFormattedDate = isoDatetimeToJqlDatetime(lastUpdateDateISO)
-        String storyJql = "project='$projectName' AND issuetype=Story AND updatedDate >= \"${jqlFormattedDate}\" ORDER BY updatedDate DESC"
-
-        def result = get('search', [jql: storyJql])
-        if (result['total'] > 0 && result.issues.size()) {
-            return result['issues']
-        }
-
-        throw new UnexpectedMissingValue("JIRA did not return issue updated after ${jqlFormattedDate}. Check the timezone.")
+        throw new UnexpectedMissingValue("JIRA does not returned the last updated issue")
     }
 
     String jiraDatetimeToISODatetime(String rawDate) {
@@ -121,6 +107,15 @@ class SampleJIRAReporting extends FlowPlugin {
         return jiraFormattedDate
     }
 
-// === step ends ===
+    def getIssuesAfterDate(String projectName, String lastUpdateDateISO) {
+        String jiraFormattedDate = isoDatetimeToJqlDatetime(lastUpdateDateISO)
+        String storyJql = "project='$projectName' AND issuetype=Story AND updatedDate >= \"${jiraFormattedDate}\" ORDER BY updatedDate DESC"
 
+        def result = get('search', [jql: storyJql])
+        if (result['total'] > 0 && result.issues.size()) {
+            return result['issues']
+        }
+
+        throw new UnexpectedMissingValue("JIRA did not return issue updated after ${jiraFormattedDate}. Check the timezone.")
+    }
 }

@@ -2,8 +2,8 @@ import com.cloudbees.flowpdf.FlowPlugin
 import com.cloudbees.flowpdf.components.reporting.Dataset
 import com.cloudbees.flowpdf.components.reporting.Metadata
 import com.cloudbees.flowpdf.components.reporting.Reporting
-import net.sf.json.JSONObject
 
+import net.sf.json.JSONObject
 import java.text.SimpleDateFormat
 
 /**
@@ -22,7 +22,6 @@ class ReportingSampleJIRAReporting extends Reporting {
         // Return 1 if there are newer records than record to which metadata is pointing.
         return date2.compareTo(date1)
     }
-
 
     @Override
     List<Map<String, Object>> initialGetRecords(FlowPlugin flowPlugin, int i = 10) {
@@ -90,7 +89,7 @@ class ReportingSampleJIRAReporting extends Reporting {
                             source     : 'JIRA',
                             sourceUrl  : params['endpoint'],
                             type       : issue.fields.issuetype?.name,
-                            defectName : issue.fields.summary,
+                            featureName: issue.fields.summary,
                             storyPoints: issue.fields.storyPoints ?: '',
                             key        : issue.key,
                             resolution : resolutionMappings[rawResolution] ?: '',
