@@ -17,21 +17,21 @@ A detailed **Plugin Developer Guide** is provided below for further reference.
 - **flowpdk** has an upgrade command which when invoked will download the latest version of other components required for your development envirnment. In order to know if you need to invoke the upgrade command, you could either refer to the Changelog section (see below) or the Release Notes section of the Plugin Developer Guide, both of which would maintain a cumulative list of all changes.
 - The Download link below points to the latest version of **flowpdk**. In situations where **flowpdk** itself has changed and you are using an older version of **flowpdk** any upgrade to other flowpdf components using **flowpdk** will not work unless you upgrade to the latest version of **flowpdk**.
 
-[Download flowpdk](https://flowpdf-libraries.s3.amazonaws.com/flowpdf-cli.zip)
+[Download flowpdk](https://storage.googleapis.com/flowpdf-binaries/flowpdf-cli.zip)
 
-Latest Version: 2.1.0.2
+Latest Version: 2.2.0.3
 
-Release Date: 3/02/2020
+Release Date: 4/28/2020
 
 ## Plugin Developer Guide
 
-  [HTML Documentation](https://plugin-dev-guide.s3-us-west-1.amazonaws.com/latest/index.html)
+  [HTML Documentation](https://storage.googleapis.com/flowpdf-binaries/doc/latest/index.html)
 
-  [PDF Documentation](https://plugin-dev-guide.s3-us-west-1.amazonaws.com/latest/PluginDeveloperGuide.pdf)
+  [PDF Documentation](https://storage.googleapis.com/flowpdf-binaries/doc/latest/PluginDeveloperGuide.pdf)
 
 ## Changelog
 
-Refer to [Release Notes Section](https://plugin-dev-guide.s3-us-west-1.amazonaws.com/latest/releasenotes.html) of the Plugin Developer Guide.
+Refer to [Release Notes Section](https://storage.googleapis.com/flowpdf-binaries/doc/latest/releasenotes.html) of the Plugin Developer Guide.
 
 ## Sample Plugins built with flowpdf
 
