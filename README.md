@@ -41,6 +41,20 @@ Refer to [Release Notes Section](https://storage.googleapis.com/flowpdf-binaries
 
 2. Refer to [SampleGlassfish Plugin](perl/SampleGlassfish/README.md) for a plugin that uses CLI to integrate with Glassfish Application Server.
 
-3. Refer to [SampleGithubREST Plugin](perl/SampleGithubREST/README.md) for a plugin that uses REST generattor to integrate with Github.
+3. Refer to [SampleGithubREST Plugin](perl/SampleGithubREST/README.md) for a plugin that uses REST generator to integrate with Github.
 
-4. Refer to [SampleReporting Plugin](perl/SampleReporting/README.md) for a plugin that uses Reporting Framework to integrate withh DOIS.
+4. Refer to [SampleReporting Plugin](perl/SampleReporting/README.md) for a plugin that uses Reporting Framework to integrate with DOIS.
+
+### Groovy
+
+1. Refer to [Sample JIRA Plugin](groovy/SampleJira/README.md) for a plugin that uses REST API to integrate with JIRA.
+2. Refer to [Sample Gradle Plugin](grooovy/SampleGradle/README.md) for a plugin that uses CLI to integrate with Gradle.
+3. Refer to [Sample Github REST Plugin](groovy/SampleGithubREST) for a plugin that uses REST Generator to integrate with Github.
+4. Refer to [Sample JIRA Reporting Plugin](groovy/SampleJIRAReporting) for a plugin that uses Reporting Framework to integrate with DOIS.
+
+
+## Community Plugins Built with FlowPDF
+
+[GCP Secret Manager Plugin](https://github.com/electric-cloud-community/EC-GCP-SecretManager)
+[GCP Storage Plugin](https://github.com/electric-cloud-community/EC-GCP-Storage)
+[AWS CloudFront Plugin](https://github.com/electric-cloud-community/EC-AWS-CloudFront)
