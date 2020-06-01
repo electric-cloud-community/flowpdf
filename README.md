@@ -58,3 +58,6 @@ Refer to [Release Notes Section](https://storage.googleapis.com/flowpdf-binaries
 * [GCP Secret Manager Plugin](https://github.com/electric-cloud-community/EC-GCP-SecretManager)
 * [GCP Storage Plugin](https://github.com/electric-cloud-community/EC-GCP-Storage)
 * [AWS CloudFront Plugin](https://github.com/electric-cloud-community/EC-AWS-CloudFront)
+* [GCP Compute Plugin](https://github.com/electric-cloud-community/EC-GCP-Provision)
+* [Slack Plugin](https://github.com/electric-cloud-community/EC-Slack)
+* [CA Global Service Desk Plugin](https://github.com/electric-cloud-community/EC-EC-CAGlobalServiceDesk)
