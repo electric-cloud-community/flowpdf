@@ -55,6 +55,6 @@ Refer to [Release Notes Section](https://storage.googleapis.com/flowpdf-binaries
 
 ## Community Plugins Built with FlowPDF
 
-[GCP Secret Manager Plugin](https://github.com/electric-cloud-community/EC-GCP-SecretManager)
-[GCP Storage Plugin](https://github.com/electric-cloud-community/EC-GCP-Storage)
-[AWS CloudFront Plugin](https://github.com/electric-cloud-community/EC-AWS-CloudFront)
+* [GCP Secret Manager Plugin](https://github.com/electric-cloud-community/EC-GCP-SecretManager)
+* [GCP Storage Plugin](https://github.com/electric-cloud-community/EC-GCP-Storage)
+* [AWS CloudFront Plugin](https://github.com/electric-cloud-community/EC-AWS-CloudFront)
