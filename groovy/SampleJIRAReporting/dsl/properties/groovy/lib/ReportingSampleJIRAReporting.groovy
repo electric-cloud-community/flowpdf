@@ -2,8 +2,8 @@ import com.cloudbees.flowpdf.FlowPlugin
 import com.cloudbees.flowpdf.components.reporting.Dataset
 import com.cloudbees.flowpdf.components.reporting.Metadata
 import com.cloudbees.flowpdf.components.reporting.Reporting
-import net.sf.json.JSONObject
 
+import net.sf.json.JSONObject
 import java.text.SimpleDateFormat
 
 /**
@@ -23,7 +23,6 @@ class ReportingSampleJIRAReporting extends Reporting {
         return date2.compareTo(date1)
     }
 
-
     @Override
     List<Map<String, Object>> initialGetRecords(FlowPlugin flowPlugin, int i = 10) {
         def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
@@ -31,16 +30,16 @@ class ReportingSampleJIRAReporting extends Reporting {
     }
 
     @Override
+    Map<String, Object> getLastRecord(FlowPlugin flowPlugin) {
+        def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
+        return flowPlugin.getLastUpdatedIssue(params['jiraProjectName'])
+    }
+
+    @Override
     List<Map<String, Object>> getRecordsAfter(FlowPlugin flowPlugin, Metadata metadata) {
         def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
         def metadataValue = metadata.getValue()
         return flowPlugin.getIssuesAfterDate(params['jiraProjectName'], metadataValue['modifiedOn'])
-    }
-
-    @Override
-    Map<String, Object> getLastRecord(FlowPlugin flowPlugin) {
-        def params = flowPlugin.getContext().getRuntimeParameters().getAsMap()
-        return flowPlugin.getLastUpdatedIssue(params['jiraProjectName'])
     }
 
     @Override
@@ -64,33 +63,42 @@ class ReportingSampleJIRAReporting extends Reporting {
                     'Resolved'   : 'Resolved',
             ]
 
+            Map<String, String> resolutionMappings = [
+                    'Cannot Reproduce': 'Cannot Reproduce',
+                    'Duplicate'       : 'Duplicate',
+                    'Done'            : 'Fixed',
+                    'Won\'t Do'       : 'Incomplete',
+                    'Won\'t Do'       : 'Won\'t Fix'
+            ]
+
+
             String rawStatus = issue.fields.status?.statusCategory?.name ?: ''
+            String rawResolution = issue.fields.resolution?.name ?: ''
 
             String jiraModifiedOn = issue.fields.updated ?: ''
             String jiraCreatedOn = issue.fields.created ?: ''
             String jiraResolvedOn = issue.fields.resolutionDate ?: ''
 
-            String modifiedOn = jiraPlugin.jiraDateStringToISODatetime(jiraModifiedOn)
-            String createdOn = jiraPlugin.jiraDateStringToISODatetime(jiraCreatedOn)
-            String resolvedOn = jiraPlugin.jiraDateStringToISODatetime(jiraResolvedOn)
+            String modifiedOn = jiraPlugin.jiraDatetimeToISODatetime(jiraModifiedOn)
+            String createdOn = jiraPlugin.jiraDatetimeToISODatetime(jiraCreatedOn)
+            String resolvedOn = jiraPlugin.jiraDatetimeToISODatetime(jiraResolvedOn)
 
             dataset.newData([
                     reportObjectType: 'feature',
-                    values          : [
-                            source    : 'JIRA',
-                            sourceUrl : params['endpoint'],
-                            type      : issue.fields.issuetype?.name,
-                            defectName: issue.fields.summary,
-                            key       : issue.key,
-                            resolution: issue.fields.resolution?.name ?: '',
-                            status    : statusMappings[rawStatus] ?: 'Open',
-                            modifiedOn: modifiedOn,
-                            createdOn : createdOn,
-                            resolvedOn: resolvedOn,
+                    values: [
+                            source     : 'JIRA',
+                            sourceUrl  : params['endpoint'],
+                            type       : issue.fields.issuetype?.name,
+                            featureName: issue.fields.summary,
+                            storyPoints: issue.fields.storyPoints ?: '',
+                            key        : issue.key,
+                            resolution : resolutionMappings[rawResolution] ?: '',
+                            status     : statusMappings[rawStatus] ?: 'Open',
+                            modifiedOn : modifiedOn,
+                            createdOn  : createdOn,
+                            resolvedOn : resolvedOn,
                     ]])
         }
-
-        plugin.log.debug("DATASET: ", dataset['data'].toString())
 
         return dataset
     }
