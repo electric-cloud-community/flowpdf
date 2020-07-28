@@ -1,0 +1,11 @@
+---
+configuration:
+  config: config
+  checkConnection: true
+  debugLevel: 2
+  endpoint: https://cloudbees.atlassian.net
+  basic_credential:
+    userName: 'pshubina@cloudbees.com'
+    password:
+      command: cat /tmp/token
+pluginKey: EC-Conflience

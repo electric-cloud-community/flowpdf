@@ -1,0 +1,78 @@
+pluginInfo:
+  pluginName: 'EC-Confluence'
+  version: '0.3.0'
+  description: 'Create content in Atlassian Confluence'
+  author: 'Tony Wilmer'
+  supportUrl: 'https://www.cloudbees.com'
+  category: 'Project Management'
+  shell: 'ec-groovy'
+
+configuration:
+  checkConnection: true
+  restConfigInfo:
+    endpointLabel: 'API Endpoint'
+    checkConnectionUri: '/rest/applinks/latest/manifest'
+    defaultEndpointValue: 'https://mycompany.atlassian.net'
+    headers:
+      Accept: 'application/json'
+    authSchemes:
+      basic:
+        userNameLabel: 'Username'
+        passwordLabel: 'Password'
+        description: 'Confluence token'
+        credentialLabel: Token credential
+  hasProxySupport: true
+  hasDebugLevel: true
+
+procedures:
+-
+  name: 'Create Page'
+  description: 'Create a Confluence wiki page'
+  hasConfig: true
+  shell: 'ec-groovy'
+  parameters:
+  -
+    name: SpaceKey
+    documentation: 'Confluence Space Key (e.g., ~12456789 from https://mycompany.atlassian.net/wiki/spaces/~123456789/pages/9876543210/Sample+Page)'
+    required: true
+    type: entry
+    label: Space Key
+    restParamInfo:
+      in: body
+  -
+    name: Title
+    documentation: Unique Page Title
+    required: true
+    type: entry
+    label: Page Title
+    restParamInfo:
+      in: body
+  -
+    name: Ancestors
+    documentation: 'Page Ancestor (e.g., 9876543210 from https://mycompany.atlassian.net/wiki/spaces/~123456789/pages/9876543210/Sample+Page)'
+    required: true
+    type: entry
+    label: Page Ancestors
+    restParamInfo:
+      in: body
+  -
+    name: Content
+    documentation: Page Content
+    required: true
+    type: textarea
+    label: Page Content
+    restParamInfo:
+      in: body
+
+
+  outputParameters:
+  -
+    name: PageUrl
+    description: URL link to the created page
+
+  restProcedureInfo:
+    url: /wiki/rest/api/content
+    methodName: 'createPage'
+    httpMethod: 'POST'
+
+
