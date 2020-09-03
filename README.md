@@ -1,7 +1,7 @@
-# CD Plugin Development Kit (pdk)
+# CloudBees CD Plugin Development Kit (pdk)
 
 ## Overview
-The CD Plugin Development Kit (**pdk** in short) provides a combination of Tools, APIs and libraries which can be used to create a flow plugin in 4 steps. Refer to the Development Process section below.
+The CloudBees CD Plugin Development Kit (**pdk** in short) provides a combination of Tools, APIs and libraries which can be used to create a flow plugin in 4 steps. Refer to the Development Process section below.
 
 The entire set of capabilities of the framework are made available through a single command line tool (CLI) called **pdk**.
 
