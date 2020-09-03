@@ -9,31 +9,29 @@ A detailed **Plugin Developer Guide** is provided below for further reference.
 
 ## Development Process
 
-![flowpdk-user-flow](https://user-images.githubusercontent.com/6411605/59960113-f55c5980-9477-11e9-89b4-f044b3c56843.png)
+![pdk-user-flow](https://user-images.githubusercontent.com/6411605/59960113-f55c5980-9477-11e9-89b4-f044b3c56843.png)
 
-## Download flowpdk
+## Download pdk
 **Note**:
 - Once you download **flowpdk** all other tools/libraries can be downloaded using the CLI itself.
 - **flowpdk** has an upgrade command which when invoked will download the latest version of other components required for your development envirnment. In order to know if you need to invoke the upgrade command, you could either refer to the Changelog section (see below) or the Release Notes section of the Plugin Developer Guide, both of which would maintain a cumulative list of all changes.
-- The Download link below points to the latest version of **flowpdk**. In situations where **flowpdk** itself has changed and you are using an older version of **flowpdk** any upgrade to other flowpdf components using **flowpdk** will not work unless you upgrade to the latest version of **flowpdk**.
+- The Download link below points to the latest version of **pdk**. In situations where **pdk** itself has changed and you are using an older version of **pdk** any upgrade to other flowpdf components using **pdk** will not work unless you upgrade to the latest version of **pdk**.
 
-[Download flowpdk](https://storage.googleapis.com/flowpdf-binaries/flowpdf-cli.zip)
+[Download pdk](https://storage.googleapis.com/flowpdf-binaries/pdk-cli.zip)
 
-Latest Version: 2.3.0.4
+Latest Version: 3.0.0.1
 
-Release Date: 7/2/2020
+Release Date: 9/3/2020
 
 ## Plugin Developer Guide
 
-  [HTML Documentation](https://storage.googleapis.com/flowpdf-binaries/doc/latest/index.html)
-
-  [PDF Documentation](https://storage.googleapis.com/flowpdf-binaries/doc/latest/PluginDeveloperGuide.pdf)
+  https://docs.cloudbees.com/docs/cloudbees-cd/preview/plugin-developer/
 
 ## Changelog
 
-Refer to [Release Notes Section](https://storage.googleapis.com/flowpdf-binaries/doc/latest/releasenotes.html) of the Plugin Developer Guide.
+Refer to [Release Notes Section](https://docs.cloudbees.com/docs/cloudbees-cd/preview/plugin-developer/releasenotes) of the Plugin Developer Guide.
 
-## Sample Plugins built with flowpdf
+## Sample Plugins built with pdk
 
 ### Perl
 
@@ -53,7 +51,7 @@ Refer to [Release Notes Section](https://storage.googleapis.com/flowpdf-binaries
 4. Refer to [Sample JIRA Reporting Plugin](groovy/SampleJIRAReporting) for a plugin that uses Reporting Framework to integrate with DOIS.
 
 
-## Community Plugins Built with FlowPDF
+## Community Plugins Built with pdk
 
 * [GCP Secret Manager Plugin](https://github.com/electric-cloud-community/EC-GCP-SecretManager)
 * [GCP Storage Plugin](https://github.com/electric-cloud-community/EC-GCP-Storage)
