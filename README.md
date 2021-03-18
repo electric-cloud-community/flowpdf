@@ -19,9 +19,9 @@ A detailed **Plugin Developer Guide** is provided below for further reference.
 
 [Download pdk](https://storage.googleapis.com/flowpdf-binaries/pdk-cli.zip)
 
-Latest Version: 3.0.0.1
+Latest Version: 3.2.0.3
 
-Release Date: 9/3/2020
+Release Date: 3/24/2021
 
 ## Plugin Developer Guide
 
@@ -49,6 +49,7 @@ Refer to [Release Notes Section](https://docs.cloudbees.com/docs/cloudbees-cd/pr
 2. Refer to [Sample Gradle Plugin](grooovy/SampleGradle/README.md) for a plugin that uses CLI to integrate with Gradle.
 3. Refer to [Sample Github REST Plugin](groovy/SampleGithubREST) for a plugin that uses REST Generator to integrate with Github.
 4. Refer to [Sample JIRA Reporting Plugin](groovy/SampleJIRAReporting) for a plugin that uses Reporting Framework to integrate with DOIS.
+5. Refer to [Sample Webhook Plugin](groovy/SampleWebhook) for a plugin that uses webhoooks.
 
 
 ## Community Plugins Built with pdk
