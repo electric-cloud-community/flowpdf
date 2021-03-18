@@ -1,0 +1,51 @@
+apply plugin: 'groovy'
+
+repositories{
+    mavenCentral()
+    flatDir {
+        dirs 'agent/deps/libs'
+    }
+}
+
+dependencies {
+    implementation 'org.codehaus.groovy:groovy-all:2.4.13'
+
+    // Change the version if you have upgraded the groovy library
+    implementation 'com.electriccloud.plugins:flowpdf-groovy-lib:1.1.3.0'
+    implementation group: 'org.gitlab4j', name: 'gitlab4j-api', version: '4.15.7'
+}
+
+
+sourceSets {
+    main {
+        groovy {
+            srcDirs = ['dsl/properties/groovy/lib']
+        }
+    }
+}
+
+
+// Use this task to include third-party dependencies into to agent folder
+task copyDependencies(type: Copy) {
+    outputs.upToDateWhen { false }
+
+    from configurations.runtimeClasspath {
+        // Dependencies already included into the COMMANDER_HOME/utils/langs
+        exclude group: 'org.codehaus.groovy', module: 'groovy-all'
+        exclude group: "commons-lang", module: 'commons-lang'
+        exclude group: "commons-codec", module: 'commons-codec'
+        exclude group: "commons-beanutils", module: 'commons-beanutils'
+        exclude group: "commons-collections", module: 'commons-collections'
+        exclude group: "com.electriccloud.plugins", module: 'flowpdf-groovy-lib'
+        exclude group: "com.electriccloud", module: 'commander-api-bindings'
+        exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        exclude group: 'xml-resolver', module: 'xml-resolver'
+        exclude group: 'xml-apis', module: 'xml-apis'
+        exclude group: 'xerces', module: 'xercesImpl'
+        exclude group: 'net.sf.ezmorph', module: 'ezmorph'
+        exclude group: 'net.sourceforge.nekohtml', module: 'nekohtml'
+        exclude group: 'net.sf.json-lib', module: 'json-lib'
+        exclude group: 'org.codehaus.groovy.modules.http-builder', module: 'http-builder'
+    }
+    into 'agent/deps/libs'
+}

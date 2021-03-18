@@ -1,0 +1,71 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call pdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'SampleWebhook'
+  version: '1.0.0'
+  description: 'Sample plugin to demonstrate webhook component'
+  author: 'Polina'
+  supportUrl: 'none'
+  category: 'Webhook'
+  shell: 'ec-groovy'
+
+# Plugin configuration description
+configuration:
+  # This is a shell used for checking connection
+  shell: 'ec-groovy'
+  # A script for checking connection will be generated
+  checkConnection: 'true'
+  # A set of fields will be added to process debug level in the configuration
+  hasDebugLevel: true
+  parameters:
+  -
+    name: config
+    documentation: The name for the created configuration
+    required: true
+    type: entry
+    label: Configuration Name
+  -
+    name: desc
+    documentation: Description for the configuration
+    required: false
+    type: entry
+    label: Description
+  -
+    name: endpoint
+    documentation: Third-party endpoint to connect to.
+    required: false
+    type: entry
+    label: Endpoint
+  -
+    name: credential
+    documentation: A sample credential
+    required: true
+    type: credential
+    label: Credential
+
+
+webhook:
+  secretRequired: true
+  displayName: GitLab
+  parameters:
+    - name: repository
+      label: Repository name
+      required: true
+    - name: eventType
+      label: Event type
+      required: true
+      value: Push Hook
+  setupProcedure:
+    parameters:
+      - name: projectId
+        required: true
+      - name: accessToken_credential
+        type: credential
+        credentialType: secret
+        required: true
+      - name: repository
+        type: entry
+        required: true
+
+
