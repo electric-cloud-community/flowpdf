@@ -25,11 +25,11 @@ Release Date: 3/24/2021
 
 ## Plugin Developer Guide
 
-  https://docs.cloudbees.com/docs/cloudbees-cd/preview/plugin-developer/
+  https://docs.cloudbees.com/docs/cloudbees-cd-pdk/latest/pdk/pdk
 
 ## Changelog
 
-Refer to [Release Notes Section](https://docs.cloudbees.com/docs/cloudbees-cd/preview/plugin-developer/releasenotes) of the Plugin Developer Guide.
+Refer to [Release Notes Section](https://docs.cloudbees.com/docs/cloudbees-cd-pdk/latest/pdk/releasenotes) of the Plugin Developer Guide.
 
 ## Sample Plugins built with pdk
 
