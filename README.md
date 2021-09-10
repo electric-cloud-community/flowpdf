@@ -19,9 +19,9 @@ A detailed **Plugin Developer Guide** is provided below for further reference.
 
 [Download pdk](https://storage.googleapis.com/flowpdf-binaries/pdk-cli.zip)
 
-Latest Version: 3.2.1.4
+Latest Version: 3.3.0.6
 
-Release Date: 4/27/2021
+Release Date: 9/9/2021
 
 ## Plugin Developer Guide
 
