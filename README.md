@@ -17,11 +17,11 @@ A detailed **Plugin Developer Guide** is provided below for further reference.
 - **flowpdk** has an upgrade command which when invoked will download the latest version of other components required for your development envirnment. In order to know if you need to invoke the upgrade command, you could either refer to the Changelog section (see below) or the Release Notes section of the Plugin Developer Guide, both of which would maintain a cumulative list of all changes.
 - The Download link below points to the latest version of **pdk**. In situations where **pdk** itself has changed and you are using an older version of **pdk** any upgrade to other flowpdf components using **pdk** will not work unless you upgrade to the latest version of **pdk**.
 
-[Download pdk](https://storage.googleapis.com/flowpdf-binaries/pdk-cli.zip)
+[Download pdk](https://downloads.cloudbees.com/cloudbees-cd/pdk/release/pdk-cli.zip)
 
-Latest Version: 3.3.0.6
+Latest Version: 3.4.0.7
 
-Release Date: 9/9/2021
+Release Date: 10/27/2021
 
 ## Plugin Developer Guide
 
