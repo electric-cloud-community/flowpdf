@@ -60,4 +60,4 @@ Refer to [Release Notes Section](https://docs.cloudbees.com/docs/cloudbees-cd-pd
 * [AWS CloudFront Plugin](https://github.com/electric-cloud-community/EC-AWS-CloudFront)
 * [GCP Compute Plugin](https://github.com/electric-cloud-community/EC-GCP-Provision)
 * [Slack Plugin](https://github.com/electric-cloud-community/EC-Slack)
-* [CA Global Service Desk Plugin](https://github.com/electric-cloud-community/EC-EC-CAGlobalServiceDesk)
+* [CA Global Service Desk Plugin](https://github.com/electric-cloud-community/EC-CAGlobalServiceDesk)
